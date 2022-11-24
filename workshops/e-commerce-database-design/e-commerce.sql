@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS public.categories
 
 CREATE TABLE IF NOT EXISTS public.cities
 (
-    id integer NOT NULL,
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY,
     name character varying(50) COLLATE pg_catalog."default" NOT NULL,
     country_id integer NOT NULL,
     CONSTRAINT cities_pkey PRIMARY KEY (id)
