@@ -7,6 +7,7 @@
 
 ## Technologies, Tools And Techniques Used
 - Java
+- PostgreSQL
 
 ## Contributing
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are greatly appreciated.
