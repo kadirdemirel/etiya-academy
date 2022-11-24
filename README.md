@@ -32,4 +32,5 @@ Project Link: https://github.com/kadirdemirel/etiya-academy
 ## Acknowledgment
 
 <a href="https://github.com/engindemirog">🙏engindemirog</a> <br>
-<a href="https://github.com/halitkalayci">🙏halitkalayci</a>
+<a href="https://github.com/halitkalayci">🙏halitkalayci</a> <br>
+<a href="https://github.com/iremcibal">🙏iremcibal</a>
