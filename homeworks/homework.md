@@ -4,24 +4,24 @@
 insert into products(name,stock,description,image_url,unit_price)
 values('laptop',100,'Ultra performanslı laptop.','laptop.png',10000)
 ```
-![](images/insert.png)
+![](images/insert.PNG)
 ### Delete Command
 ```sh
 Delete from products where id=7
 ```
-![](images/delete.png)
+![](images/delete.PNG)
 ### Update Command
 ```sh
 Update products set unit_price=12000 where id=7
 ```
-![](images/update.png)
+![](images/update.PNG)
 ### Between Command
 ```sh
 select name, as "Ürün Adı", unit_price as "Ürün Fiyatı"
 from products
 where unit_price between 100 and 200
 ```
-![](images/between.png)
+![](images/between.PNG)
 ### In Command
 ```sh
 select ci.name as "Şehir", ic.first_name as "Ad", ic.last_name as "Soyad"
@@ -42,7 +42,7 @@ inner join cities ci
 on t.city_id = ci.id
 where ci.name in ('Ankara', 'İstanbul')
 ```
-![](images/in.png)
+![](images/in.PNG)
 ### Group By Command
 ```sh
 select p.name as "Ürün Adı", c.name as "Kategori Adı"
@@ -53,7 +53,7 @@ inner join categories c
 on pc.category_id = c.id
 group by p.name, c.name
 ```
-![](images/groupby.png)
+![](images/groupby.PNG)
 ### Inner Join Command
 ```sh
 select max(pr.unit_price) as "Ürün Ücreti", pr.name as "Ürün Adı"
@@ -64,21 +64,21 @@ inner join products pr
 on bi.product_id = pr.id
 group by pr.name
 ```
-![](images/innerjoin.png)
+![](images/innerjoin.PNG)
 ### Left Join Command
 ```sh
 select ci.id, t.city_id from cities ci
 left join towns t
 on ci.id=t.city_id
 ```
-![](images/leftjoin.png)
+![](images/leftjoin.PNG)
 ### Right Join Command
 ```sh
 select * from product_categories p
 right join categories c
 on p.category_id = c.id
 ```
-![](images/right.png)
+![](images/right.PNG)
 ### Full Outer Join Command
 ```sh
 select p.name, p.unit_price, bi.quantity, b.total_price from basket_items bi
@@ -87,4 +87,4 @@ on bi.basket_id = b.id
 full outer join products p
 on bi.product_id = p.id
 ```
-![](images/fullouter.png)
+![](images/fullouter.PNG)
