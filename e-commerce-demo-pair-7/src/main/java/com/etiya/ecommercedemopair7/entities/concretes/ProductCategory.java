@@ -1,5 +1,6 @@
 package com.etiya.ecommercedemopair7.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,11 +19,13 @@ public class ProductCategory {
     @Column(name = "id")
     private int id;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "product_id")
+    @JsonManagedReference
     private Product product;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
+    @JsonManagedReference
     private Category category;
 }
