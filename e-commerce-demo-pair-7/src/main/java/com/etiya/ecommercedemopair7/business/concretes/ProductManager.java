@@ -1,6 +1,7 @@
 package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.ProductService;
+import com.etiya.ecommercedemopair7.entities.concretes.Category;
 import com.etiya.ecommercedemopair7.entities.concretes.Product;
 import com.etiya.ecommercedemopair7.repository.abstracts.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,15 @@ public class ProductManager implements ProductService {
     @Override
     public Product getById(int productId) {
         return this.productRepository.findById(productId).orElseThrow();
+    }
+
+    @Override
+    public Product getByName(String name) {
+        return productRepository.findByName(name);
+    }
+
+    @Override
+    public Product customGetByName(String name) {
+        return productRepository.customFindByName(name);
     }
 }

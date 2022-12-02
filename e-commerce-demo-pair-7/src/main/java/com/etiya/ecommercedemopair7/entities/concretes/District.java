@@ -23,7 +23,7 @@ public class District {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "district_id")
+    @JoinColumn(name = "town_id")
     private Town town;
 
     @OneToMany(mappedBy = "district")

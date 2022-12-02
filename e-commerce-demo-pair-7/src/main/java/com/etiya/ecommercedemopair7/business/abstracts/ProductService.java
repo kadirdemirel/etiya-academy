@@ -6,5 +6,10 @@ import java.util.List;
 
 public interface ProductService {
     List<Product> getAll();
+
     Product getById(int productId);
+
+    Product getByName(String name);
+
+    Product customGetByName(String name);
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/products")
 public class ProductsController {
     private ProductService productService;
 
@@ -24,6 +24,15 @@ public class ProductsController {
 
     @GetMapping("/geybyid")
     public Product getById(@RequestParam int productId) {
-        return this.getById(productId);
+        return this.productService.getById(productId);
+    }
+
+    @GetMapping("/geybyname")
+    public Product getByName(@RequestParam String name) {
+        return this.productService.getByName(name);
+    }
+    @GetMapping("custom-get-by-name")
+    public Product customGetByName(@RequestParam("name") String name){
+        return productService.customGetByName(name);
     }
 }
