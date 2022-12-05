@@ -1,13 +1,13 @@
 package com.etiya.ecommercedemopair7.api.controllers;
 
-import com.etiya.ecommercedemopair7.business.abstracts.CategoryService;
+import com.etiya.ecommercedemopair7.business.abstracts.ICategoryService;
+import com.etiya.ecommercedemopair7.business.request.categories.AddCategoryRequest;
+import com.etiya.ecommercedemopair7.business.response.categories.AddCategoryResponse;
 import com.etiya.ecommercedemopair7.entities.concretes.Category;
-import com.etiya.ecommercedemopair7.entities.concretes.Product;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,31 +15,36 @@ import java.util.List;
 @RequestMapping("/api/categories")
 public class CategoriesController {
 
-    private CategoryService categoryService;
+    private ICategoryService ICategoryService;
 
     @Autowired
-    CategoriesController(CategoryService categoryService) {
-        this.categoryService = categoryService;
+    CategoriesController(ICategoryService ICategoryService) {
+        this.ICategoryService = ICategoryService;
     }
 
     @GetMapping("/getall")
     public List<Category> getAll() {
-        return this.categoryService.getAll();
+        return this.ICategoryService.getAll();
     }
 
     @GetMapping("/geybyid")
     public Category getById(@RequestParam int categoryId) {
-        return this.categoryService.getById(categoryId);
+        return this.ICategoryService.getById(categoryId);
     }
 
     @GetMapping("get-by-name")
     public Category getByName(@RequestParam("name") String name) {
-        return categoryService.getByName(name);
+        return ICategoryService.getByName(name);
     }
 
     @GetMapping("custom-get-by-name")
     public Category customGetByName(@RequestParam("name") String name) {
-        return categoryService.customGetByName(name);
+        return ICategoryService.customGetByName(name);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<AddCategoryResponse> add(@RequestBody AddCategoryRequest addCategoryRequest) {
+        return new ResponseEntity<AddCategoryResponse>(ICategoryService.add(addCategoryRequest), HttpStatus.CREATED);
     }
 
 }
