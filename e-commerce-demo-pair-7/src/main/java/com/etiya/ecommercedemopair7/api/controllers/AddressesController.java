@@ -22,9 +22,9 @@ public class AddressesController {
         this.addressService = addressService;
     }
 
-    @GetMapping("/{addressId}")
-    public Address getById(@PathVariable int addressId) {
-        return addressService.getById(addressId);
+    @GetMapping("/{id}")
+    public Address getById(@PathVariable int id) {
+        return addressService.getById(id);
     }
 
     @PostMapping("/add")

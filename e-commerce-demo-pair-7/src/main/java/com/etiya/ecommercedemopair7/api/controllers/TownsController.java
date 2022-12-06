@@ -1,7 +1,6 @@
 package com.etiya.ecommercedemopair7.api.controllers;
 
 import com.etiya.ecommercedemopair7.business.abstracts.ITownService;
-import com.etiya.ecommercedemopair7.entities.concretes.City;
 import com.etiya.ecommercedemopair7.entities.concretes.Town;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
