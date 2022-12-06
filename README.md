@@ -1,14 +1,20 @@
 
- <h3 align="center">Etiya 5th Term</h3>
- <p align="center">Etiya 5th Term, includes project task and workshop. </p>
+ <h3 align="center">Etiya 5th Term Academy</h3>
+ <p align="center">Etiya 5th Term Academy, includes project task and workshop. </p>
 
 ![](homeworks/images/etiya.png)
  
 ## Build With
  <a href="https://github.com/kadirdemirel" rel="nofollow"><img align="" alt="JAVA" width="26px" src="https://raw.githubusercontent.com/kadirdemirel/kadirdemirel/main/images/java.png" style="max-width:100%;"></a>
+  <a href="https://github.com/kadirdemirel" rel="nofollow"><img align="" alt="SPRINGBOOT" width="26px" src="https://miro.medium.com/fit/c/294/294/1*R6jBaoIrvb49knSiTJ7lgA.png" style="max-width:100%;"></a>
 
-## Technologies, Tools And Techniques Used
+## Used Technologies 
 - Java
+- Spring Boot
+- N-Tier Architecture
+- JPA/Hibernate
+- Maven
+- Lombok
 - PostgreSQL
 
 ## Contributing
