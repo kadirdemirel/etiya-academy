@@ -1,6 +1,8 @@
 
  <h3 align="center">Etiya 5th Term</h3>
  <p align="center">Etiya 5th Term, includes project task and workshop. </p>
+
+![](homeworks/images/etiya.png)
  
 ## Build With
  <a href="https://github.com/kadirdemirel" rel="nofollow"><img align="" alt="JAVA" width="26px" src="https://raw.githubusercontent.com/kadirdemirel/kadirdemirel/main/images/java.png" style="max-width:100%;"></a>
