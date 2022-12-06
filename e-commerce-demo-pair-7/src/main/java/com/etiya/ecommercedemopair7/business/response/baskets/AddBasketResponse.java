@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddBasketResponse {
-    int id;
+    int customerId;
     double totalPrice;
     double shippingPrice;
 }

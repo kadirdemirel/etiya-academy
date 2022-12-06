@@ -1,6 +1,7 @@
 package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.IBasketService;
+import com.etiya.ecommercedemopair7.business.abstracts.ICustomerService;
 import com.etiya.ecommercedemopair7.business.request.baskets.AddBasketRequest;
 import com.etiya.ecommercedemopair7.business.response.baskets.AddBasketResponse;
 import com.etiya.ecommercedemopair7.entities.concretes.Basket;
@@ -11,10 +12,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class BasketManager implements IBasketService {
     private IBasketRepository basketRepository;
+    private ICustomerService customerService;
 
     @Autowired
-    public BasketManager(IBasketRepository basketRepository) {
+    public BasketManager(IBasketRepository basketRepository, ICustomerService customerService) {
         this.basketRepository = basketRepository;
+        this.customerService = customerService;
     }
 
 
@@ -27,5 +30,9 @@ public class BasketManager implements IBasketService {
         AddBasketResponse response = new AddBasketResponse(savedBasket.getId(), savedBasket.getTotalPrice(), savedBasket.getShippingPrice());
         return response;
     }
+
+
+
+
 }
 

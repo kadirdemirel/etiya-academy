@@ -16,7 +16,6 @@ import javax.persistence.Table;
 @Table(name = "corporate_customers")
 @PrimaryKeyJoinColumn(name = "id")
 public class CorporateCustomer extends Customer {
-
     @Column(name = "name")
     private String name;
 

@@ -2,7 +2,6 @@ package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.ICountryService;
 import com.etiya.ecommercedemopair7.entities.concretes.Country;
-import com.etiya.ecommercedemopair7.entities.concretes.User;
 import com.etiya.ecommercedemopair7.repository.abstracts.ICountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

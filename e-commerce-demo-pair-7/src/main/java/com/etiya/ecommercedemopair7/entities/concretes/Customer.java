@@ -13,7 +13,6 @@ import javax.persistence.*;
 @Table(name = "customers")
 @PrimaryKeyJoinColumn(name = "id")
 public class Customer extends User {
-
     @Column(name = "number")
     private String number;
 }

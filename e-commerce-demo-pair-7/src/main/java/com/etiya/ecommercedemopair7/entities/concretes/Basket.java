@@ -12,7 +12,6 @@ import java.util.List;
 @Table(name = "baskets")
 @PrimaryKeyJoinColumn(name = "id")
 public class Basket extends Customer {
-
     @Column(name = "total_price")
     private double totalPrice;
 

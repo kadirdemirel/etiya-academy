@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddBasketRequest {
+    private int customerId;
     private double totalPrice;
     private double shippingPrice;
 }
