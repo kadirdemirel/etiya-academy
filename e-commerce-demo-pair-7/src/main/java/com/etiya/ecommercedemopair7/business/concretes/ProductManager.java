@@ -37,4 +37,24 @@ public class ProductManager implements IProductService {
     public Product customGetByName(String name) {
         return IProductRepository.customFindByName(name);
     }
+
+    @Override
+    public AddProductResponse add(AddProductRequest addProductRequest) {
+        Product product = new Product();
+        product.setName(addProductRequest.getName());
+
+        Product savedProduct = productRepository.save(product);
+
+        return new AddProductResponse(savedProduct.getId(), savedProduct.getName());
+    }
+
+    private Product existsByProductId(int productId) {
+        Product currentProduct;
+        try {
+            currentProduct = this.productRepository.findById(productId).get();
+        } catch (Exception e) {
+            throw new RuntimeException("İlgili ürün bulunamadı.");
+        }
+        return currentProduct;
+    }
 }
