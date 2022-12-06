@@ -12,32 +12,32 @@ import java.util.List;
 
 @Service
 public class CategoryManager implements ICategoryService {
-    private ICategoryRepository ICategoryRepository;
+    private ICategoryRepository categoryRepository;
 
     @Autowired
-    CategoryManager(ICategoryRepository ICategoryRepository) {
-        this.ICategoryRepository = ICategoryRepository;
+    CategoryManager(ICategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
     }
 
 
     @Override
     public List<Category> getAll() {
-        return this.ICategoryRepository.findAll();
+        return this.categoryRepository.findAll();
     }
 
     @Override
     public Category getById(int categoryId) {
-        return this.ICategoryRepository.findById(categoryId).orElseThrow();
+        return existsByCategoryId(categoryId);
     }
 
     @Override
     public Category getByName(String name) {
-        return ICategoryRepository.findByName(name);
+        return categoryRepository.findByName(name);
     }
 
     @Override
     public Category customGetByName(String name) {
-        return ICategoryRepository.customFindByName(name);
+        return categoryRepository.customFindByName(name);
     }
 
     @Override
@@ -45,9 +45,24 @@ public class CategoryManager implements ICategoryService {
         Category category = new Category();
         category.setName(addCategoryRequest.getName());
         category.setRefId(addCategoryRequest.getRefId());
+        categoryCanNotExistWithSameName(addCategoryRequest.getName());
+        Category savedCategory = categoryRepository.save(category);
+        return new AddCategoryResponse(savedCategory.getId(), savedCategory.getRefId(), savedCategory.getName());
+    }
 
-        Category save = ICategoryRepository.save(category);
-        AddCategoryResponse response = new AddCategoryResponse(save.getId(), save.getRefId(), save.getName());
-        return response;
+    private void categoryCanNotExistWithSameName(String name) {
+        boolean isExists = categoryRepository.existsCategoryByName(name);
+        if (isExists)
+            throw new RuntimeException("Bu isimle bir kategori zaten mevcut!");
+    }
+
+    private Category existsByCategoryId(int id) {
+        Category currentCategory;
+        try {
+            currentCategory = this.categoryRepository.findById(id).get();
+        } catch (Exception e) {
+            throw new RuntimeException("İlgili kategori bulunamadı.");
+        }
+        return currentCategory;
     }
 }

@@ -31,11 +31,9 @@ public class IndividualCustomerManager implements IIndividualCustomerService {
 
         IndividualCustomer savedIndividualCustomer = individualCustomerRepository.save(individualCustomer);
 
-        AddIndividualCustomerResponse response = new AddIndividualCustomerResponse(
+        return new AddIndividualCustomerResponse(
                 savedIndividualCustomer.getEmail(), savedIndividualCustomer.getNumber(), savedIndividualCustomer.getFirstName(),
                 savedIndividualCustomer.getLastName(), savedIndividualCustomer.getIdentity(), savedIndividualCustomer.getBirthDate()
         );
-
-        return response;
     }
 }

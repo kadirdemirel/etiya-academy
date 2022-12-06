@@ -28,10 +28,10 @@ public class DeliveryOptionManager implements IDeliveryOptionService {
         DeliveryOption deliveryOption = new DeliveryOption();
         deliveryOption.setName(addDeliveryOptionRequest.getName());
 
-        DeliveryOption deliveryOptionSave = deliveryOptionRepository.save(deliveryOption);
+        DeliveryOption savedDeliveryOption = deliveryOptionRepository.save(deliveryOption);
 
 
-        return new AddDeliveryOptionResponse(deliveryOptionSave.getId(), deliveryOptionSave.getName());
+        return new AddDeliveryOptionResponse(savedDeliveryOption.getId(), savedDeliveryOption.getName());
 
     }
 }

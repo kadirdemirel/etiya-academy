@@ -1,6 +1,9 @@
 package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.IProductService;
+import com.etiya.ecommercedemopair7.business.request.products.AddProductRequest;
+import com.etiya.ecommercedemopair7.business.response.products.AddProductResponse;
+import com.etiya.ecommercedemopair7.entities.concretes.Category;
 import com.etiya.ecommercedemopair7.entities.concretes.Product;
 import com.etiya.ecommercedemopair7.repository.abstracts.IProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,31 +14,31 @@ import java.util.List;
 @Service
 public class ProductManager implements IProductService {
 
-    private IProductRepository IProductRepository;
+    private IProductRepository productRepository;
 
     @Autowired
-    ProductManager(IProductRepository IProductRepository) {
-        this.IProductRepository = IProductRepository;
+    ProductManager(IProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     @Override
     public List<Product> getAll() {
-        return this.IProductRepository.findAll();
+        return this.productRepository.findAll();
     }
 
     @Override
     public Product getById(int productId) {
-        return this.IProductRepository.findById(productId).orElseThrow();
+        return existsByProductId(productId);
     }
 
     @Override
     public Product getByName(String name) {
-        return IProductRepository.findByName(name);
+        return productRepository.findByName(name);
     }
 
     @Override
     public Product customGetByName(String name) {
-        return IProductRepository.customFindByName(name);
+        return productRepository.customFindByName(name);
     }
 
     @Override

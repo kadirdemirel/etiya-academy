@@ -15,36 +15,36 @@ import java.util.List;
 @RequestMapping("/api/categories")
 public class CategoriesController {
 
-    private ICategoryService ICategoryService;
+    private ICategoryService categoryService;
 
     @Autowired
-    CategoriesController(ICategoryService ICategoryService) {
-        this.ICategoryService = ICategoryService;
+    CategoriesController(ICategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/getall")
     public List<Category> getAll() {
-        return this.ICategoryService.getAll();
+        return this.categoryService.getAll();
     }
 
     @GetMapping("/geybyid")
     public Category getById(@RequestParam int categoryId) {
-        return this.ICategoryService.getById(categoryId);
+        return this.categoryService.getById(categoryId);
     }
 
     @GetMapping("get-by-name")
     public Category getByName(@RequestParam("name") String name) {
-        return ICategoryService.getByName(name);
+        return categoryService.getByName(name);
     }
 
     @GetMapping("custom-get-by-name")
     public Category customGetByName(@RequestParam("name") String name) {
-        return ICategoryService.customGetByName(name);
+        return categoryService.customGetByName(name);
     }
 
     @PostMapping("/add")
     public ResponseEntity<AddCategoryResponse> add(@RequestBody AddCategoryRequest addCategoryRequest) {
-        return new ResponseEntity<AddCategoryResponse>(ICategoryService.add(addCategoryRequest), HttpStatus.CREATED);
+        return new ResponseEntity<AddCategoryResponse>(categoryService.add(addCategoryRequest), HttpStatus.CREATED);
     }
 
 }

@@ -9,4 +9,6 @@ public interface ICategoryRepository extends JpaRepository<Category, Integer> {
 
     @Query("SELECT p from Category as p where p.name=:name")
     Category customFindByName(String name);
+
+    boolean existsCategoryByName(String name);
 }

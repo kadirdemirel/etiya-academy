@@ -34,6 +34,20 @@ public class SellerManager implements ISellerService {
 
         return response;
 
+    }
 
+    @Override
+    public Seller getById(int sellerId) {
+        return existsBySellerId(sellerId);
+    }
+
+    private Seller existsBySellerId(int sellerId) {
+        Seller currentSeller;
+        try {
+            currentSeller = this.sellerRepository.findById(sellerId).get();
+        } catch (Exception e) {
+            throw new RuntimeException("İlgili satıcı bulunamadı.");
+        }
+        return currentSeller;
     }
 }

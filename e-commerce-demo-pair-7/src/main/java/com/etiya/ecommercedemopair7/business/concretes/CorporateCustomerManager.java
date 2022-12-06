@@ -29,11 +29,10 @@ public class CorporateCustomerManager implements ICorporateCustomerService {
 
         CorporateCustomer savedCorporateCustomer = corporateCustomerRepository.save(corporateCustomer);
 
-        AddCorporateCustomerResponse response = new AddCorporateCustomerResponse(
+        return new AddCorporateCustomerResponse(
                 savedCorporateCustomer.getEmail(), savedCorporateCustomer.getNumber(), savedCorporateCustomer.getName(),
                 savedCorporateCustomer.getTaxNumber()
         );
 
-        return response;
     }
 }
