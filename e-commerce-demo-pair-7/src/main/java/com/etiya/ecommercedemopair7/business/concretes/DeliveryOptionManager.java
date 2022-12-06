@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DeliveryOptionManager implements IDeliveryOptionService {
+
     private IDeliveryOptionRepository deliveryOptionRepository;
 
     @Autowired
@@ -17,6 +18,10 @@ public class DeliveryOptionManager implements IDeliveryOptionService {
         this.deliveryOptionRepository = deliveryOptionRepository;
     }
 
+    @Override
+    public DeliveryOption getById(int id) {
+        return deliveryOptionRepository.findById(id).orElseThrow();
+    }
 
     @Override
     public AddDeliveryOptionResponse add(AddDeliveryOptionRequest addDeliveryOptionRequest) {

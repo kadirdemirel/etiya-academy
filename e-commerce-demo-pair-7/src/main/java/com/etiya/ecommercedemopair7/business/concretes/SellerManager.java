@@ -27,9 +27,7 @@ public class SellerManager implements ISellerService {
         seller.setNumber(addSellerRequest.getNumber());
         seller.setVerified(addSellerRequest.isVerified());
 
-        Seller sellerSave = sellerRepository.save(seller);
-
-        AddSellerResponse savedSeller = new AddSellerResponse();
+        Seller savedSeller = sellerRepository.save(seller);
 
         AddSellerResponse response = new AddSellerResponse(savedSeller.getEmail(), savedSeller.getName(),
                 savedSeller.getNumber(), savedSeller.isVerified());

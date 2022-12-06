@@ -5,6 +5,7 @@ import com.etiya.ecommercedemopair7.entities.concretes.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,12 +23,12 @@ public class ProductsController {
         return this.IProductService.getAll();
     }
 
-    @GetMapping("/geybyid")
+    @GetMapping("/get-by-id")
     public Product getById(@RequestParam int productId) {
         return this.IProductService.getById(productId);
     }
 
-    @GetMapping("/geybyname")
+    @GetMapping("/get-by-name")
     public Product getByName(@RequestParam String name) {
         return this.IProductService.getByName(name);
     }
