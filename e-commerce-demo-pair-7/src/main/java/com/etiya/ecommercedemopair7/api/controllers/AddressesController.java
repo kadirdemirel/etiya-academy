@@ -3,7 +3,7 @@ package com.etiya.ecommercedemopair7.api.controllers;
 import com.etiya.ecommercedemopair7.business.abstracts.IAddressService;
 import com.etiya.ecommercedemopair7.business.request.addresses.AddAddressRequest;
 import com.etiya.ecommercedemopair7.business.response.addresses.AddAddressResponse;
-import com.etiya.ecommercedemopair7.entities.concretes.Address;
+import com.etiya.ecommercedemopair7.business.response.addresses.GetAddressResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class AddressesController {
     }
 
     @GetMapping("/{id}")
-    public Address getById(@PathVariable int id) {
+    public GetAddressResponse getById(@PathVariable int id) {
         return addressService.getById(id);
     }
 

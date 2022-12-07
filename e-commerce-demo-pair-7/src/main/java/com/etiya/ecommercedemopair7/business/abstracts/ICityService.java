@@ -1,7 +1,7 @@
 package com.etiya.ecommercedemopair7.business.abstracts;
 
-import com.etiya.ecommercedemopair7.entities.concretes.City;
+import com.etiya.ecommercedemopair7.business.response.cities.GetCityResponse;
 
 public interface ICityService {
-    City getById(int cityId);
+    GetCityResponse getById(int cityId);
 }

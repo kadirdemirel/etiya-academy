@@ -1,6 +1,7 @@
 package com.etiya.ecommercedemopair7.api.controllers;
 
 import com.etiya.ecommercedemopair7.business.abstracts.IStreetService;
+import com.etiya.ecommercedemopair7.business.response.streets.GetStreetResponse;
 import com.etiya.ecommercedemopair7.entities.concretes.Street;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ public class StreetsController {
     }
 
     @GetMapping("/{id}")
-    public Street getById(@PathVariable int id) {
+    public GetStreetResponse getById(@PathVariable int id) {
         return this.streetService.getById(id);
     }
 }

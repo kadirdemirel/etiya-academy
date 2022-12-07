@@ -3,6 +3,8 @@ package com.etiya.ecommercedemopair7.api.controllers;
 import com.etiya.ecommercedemopair7.business.abstracts.ICategoryService;
 import com.etiya.ecommercedemopair7.business.request.categories.AddCategoryRequest;
 import com.etiya.ecommercedemopair7.business.response.categories.AddCategoryResponse;
+import com.etiya.ecommercedemopair7.business.response.categories.GetAllCategoryResponse;
+import com.etiya.ecommercedemopair7.business.response.categories.GetCategoryResponse;
 import com.etiya.ecommercedemopair7.entities.concretes.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,12 +25,12 @@ public class CategoriesController {
     }
 
     @GetMapping("/getall")
-    public List<Category> getAll() {
+    public List<GetAllCategoryResponse> getAll() {
         return this.categoryService.getAll();
     }
 
     @GetMapping("/geybyid")
-    public Category getById(@RequestParam int categoryId) {
+    public GetCategoryResponse getById(@RequestParam int categoryId) {
         return this.categoryService.getById(categoryId);
     }
 

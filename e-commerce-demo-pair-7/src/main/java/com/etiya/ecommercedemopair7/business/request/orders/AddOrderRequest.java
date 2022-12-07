@@ -1,7 +1,5 @@
 package com.etiya.ecommercedemopair7.business.request.orders;
 
-import com.etiya.ecommercedemopair7.entities.concretes.Address;
-import com.etiya.ecommercedemopair7.entities.concretes.DeliveryOption;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,8 @@
 package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.ICustomerService;
+import com.etiya.ecommercedemopair7.business.response.customers.GetCustomerResponse;
+import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.entities.concretes.Customer;
 import com.etiya.ecommercedemopair7.repository.abstracts.ICustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +12,19 @@ import org.springframework.stereotype.Service;
 public class CustomerManager implements ICustomerService {
 
     private ICustomerRepository customerRepository;
+    private IModelMapperService modelMapperService;
 
     @Autowired
-    public CustomerManager(ICustomerRepository customerRepository) {
+    public CustomerManager(ICustomerRepository customerRepository, IModelMapperService modelMapperService) {
         this.customerRepository = customerRepository;
+        this.modelMapperService = modelMapperService;
     }
 
     @Override
-    public Customer getById(int customerId) {
-        return checkIfCustomerExistsById(customerId);
+    public GetCustomerResponse getById(int customerId) {
+        Customer customer = checkIfCustomerExistsById(customerId);
+        GetCustomerResponse response = modelMapperService.forResponse().map(customer, GetCustomerResponse.class);
+        return response;
     }
 
     private Customer checkIfCustomerExistsById(int id) {

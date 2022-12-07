@@ -1,7 +1,7 @@
 package com.etiya.ecommercedemopair7.business.abstracts;
 
-import com.etiya.ecommercedemopair7.entities.concretes.Country;
+import com.etiya.ecommercedemopair7.business.response.countries.GetCountryResponse;
 
 public interface ICountryService {
-    Country getById(int countryId);
+    GetCountryResponse getById(int countryId);
 }

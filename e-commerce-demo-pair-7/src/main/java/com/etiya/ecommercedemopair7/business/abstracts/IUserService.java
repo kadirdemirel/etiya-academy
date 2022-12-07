@@ -1,7 +1,9 @@
 package com.etiya.ecommercedemopair7.business.abstracts;
 
+import com.etiya.ecommercedemopair7.business.response.users.GetUserResponse;
 import com.etiya.ecommercedemopair7.entities.concretes.User;
 
 public interface IUserService {
-    User getById(int id);
+    GetUserResponse getById(int id);
+    User getByUserId(int id);
 }
