@@ -3,20 +3,25 @@ package com.etiya.ecommercedemopair7.business.concretes;
 import com.etiya.ecommercedemopair7.business.abstracts.ICategoryService;
 import com.etiya.ecommercedemopair7.business.request.categories.AddCategoryRequest;
 import com.etiya.ecommercedemopair7.business.response.categories.AddCategoryResponse;
+import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.entities.concretes.Category;
 import com.etiya.ecommercedemopair7.repository.abstracts.ICategoryRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class CategoryManager implements ICategoryService {
     private ICategoryRepository categoryRepository;
+    private IModelMapperService modelMapperService;
 
     @Autowired
-    CategoryManager(ICategoryRepository categoryRepository) {
+    CategoryManager(ICategoryRepository categoryRepository, IModelMapperService modelMapperService) {
         this.categoryRepository = categoryRepository;
+        this.modelMapperService = modelMapperService;
     }
 
 
@@ -42,12 +47,11 @@ public class CategoryManager implements ICategoryService {
 
     @Override
     public AddCategoryResponse add(AddCategoryRequest addCategoryRequest) {
-        Category category = new Category();
-        category.setName(addCategoryRequest.getName());
-        category.setRefId(addCategoryRequest.getRefId());
+        Category category = modelMapperService.forRequest().map(addCategoryRequest, Category.class);
         categoryCanNotExistWithSameName(addCategoryRequest.getName());
         Category savedCategory = categoryRepository.save(category);
-        return new AddCategoryResponse(savedCategory.getId(), savedCategory.getRefId(), savedCategory.getName());
+        AddCategoryResponse response = modelMapperService.forResponse().map(savedCategory, AddCategoryResponse.class);
+        return response;
     }
 
     private void categoryCanNotExistWithSameName(String name) {
