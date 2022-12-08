@@ -1,6 +1,7 @@
 package com.etiya.ecommercedemopair7.api.controllers;
 
 import com.etiya.ecommercedemopair7.business.abstracts.IAddressService;
+import com.etiya.ecommercedemopair7.business.constants.Paths;
 import com.etiya.ecommercedemopair7.business.request.addresses.AddAddressRequest;
 import com.etiya.ecommercedemopair7.business.response.addresses.AddAddressResponse;
 import com.etiya.ecommercedemopair7.business.response.addresses.GetAddressResponse;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/addresses")
+@RequestMapping(Paths.apiPrefix + "addresses")
 public class AddressesController {
 
     private IAddressService addressService;

@@ -1,6 +1,7 @@
 package com.etiya.ecommercedemopair7.api.controllers;
 
 import com.etiya.ecommercedemopair7.business.abstracts.IPaymentTypeService;
+import com.etiya.ecommercedemopair7.business.constants.Paths;
 import com.etiya.ecommercedemopair7.business.request.paymentTypes.AddPaymentTypeRequest;
 import com.etiya.ecommercedemopair7.business.response.paymentTypes.AddPaymentTypeResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/payment-types")
+@RequestMapping(Paths.apiPrefix + "payment-types")
 public class PaymentTypesController  {
     private IPaymentTypeService paymentTypeService;
 

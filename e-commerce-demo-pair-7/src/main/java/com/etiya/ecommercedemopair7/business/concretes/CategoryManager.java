@@ -1,6 +1,7 @@
 package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.ICategoryService;
+import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.business.request.categories.AddCategoryRequest;
 import com.etiya.ecommercedemopair7.business.response.categories.AddCategoryResponse;
 import com.etiya.ecommercedemopair7.business.response.categories.GetAllCategoryResponse;
@@ -69,7 +70,7 @@ public class CategoryManager implements ICategoryService {
     private void categoryCanNotExistWithSameName(String name) {
         boolean isExists = categoryRepository.existsCategoryByName(name);
         if (isExists)
-            throw new RuntimeException("Bu isimle bir kategori zaten mevcut!");
+            throw new RuntimeException(Messages.categoryCanNotExistWithSameName);
     }
 
     private Category existsByCategoryId(int id) {
@@ -77,7 +78,7 @@ public class CategoryManager implements ICategoryService {
         try {
             currentCategory = this.categoryRepository.findById(id).get();
         } catch (Exception e) {
-            throw new RuntimeException("İlgili kategori bulunamadı.");
+            throw new RuntimeException(Messages.existsByCategoryId);
         }
         return currentCategory;
     }

@@ -1,6 +1,7 @@
 package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.ISellerService;
+import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.business.request.sellers.AddSellerRequest;
 import com.etiya.ecommercedemopair7.business.response.sellers.AddSellerResponse;
 import com.etiya.ecommercedemopair7.business.response.sellers.GetSellerResponse;
@@ -34,8 +35,8 @@ public class SellerManager implements ISellerService {
 
     @Override
     public GetSellerResponse getById(int sellerId) {
-        Seller seller=existsBySellerId(sellerId);
-        GetSellerResponse response=modelMapperService.forResponse().map(seller,GetSellerResponse.class);
+        Seller seller = existsBySellerId(sellerId);
+        GetSellerResponse response = modelMapperService.forResponse().map(seller, GetSellerResponse.class);
         return response;
     }
 
@@ -49,7 +50,7 @@ public class SellerManager implements ISellerService {
         try {
             currentSeller = this.sellerRepository.findById(sellerId).get();
         } catch (Exception e) {
-            throw new RuntimeException("İlgili satıcı bulunamadı.");
+            throw new RuntimeException(Messages.existsBySellerId);
         }
         return currentSeller;
     }
