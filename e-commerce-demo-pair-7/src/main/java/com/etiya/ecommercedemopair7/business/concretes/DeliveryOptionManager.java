@@ -1,6 +1,7 @@
 package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.IDeliveryOptionService;
+import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.business.request.deliveryOptions.AddDeliveryOptionRequest;
 import com.etiya.ecommercedemopair7.business.response.deliveryOptions.AddDeliveryOptionResponse;
 import com.etiya.ecommercedemopair7.business.response.deliveryOptions.GetDeliveryOptionResponse;
@@ -35,7 +36,13 @@ public class DeliveryOptionManager implements IDeliveryOptionService {
     }
 
     private DeliveryOption getDeliveryOption(int id) {
-        return deliveryOptionRepository.findById(id).orElseThrow();
+        DeliveryOption currentDeliveryOption;
+        try {
+            currentDeliveryOption = deliveryOptionRepository.findById(id).get();
+        } catch (Exception e) {
+            throw new RuntimeException(Messages.deliveryOptionNotFound);
+        }
+        return currentDeliveryOption;
     }
 
     @Override

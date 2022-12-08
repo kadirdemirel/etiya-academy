@@ -1,6 +1,7 @@
 package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.IDistrictService;
+import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.business.response.districts.GetDistrictResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.entities.concretes.District;
@@ -28,7 +29,12 @@ public class DistrictManager implements IDistrictService {
     }
 
     private District checkIfDistrictExistsById(int id) {
-        District currentDistrict = this.districtRepository.findById(id).orElseThrow();
+        District currentDistrict;
+        try{
+          currentDistrict=  this.districtRepository.findById(id).get();
+        } catch (Exception e) {
+            throw new RuntimeException(Messages.districtNotFound);
+        }
         return currentDistrict;
     }
 }

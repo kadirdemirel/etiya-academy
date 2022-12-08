@@ -1,6 +1,7 @@
 package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.IProductCharService;
+import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.business.request.productChars.AddProductCharRequest;
 import com.etiya.ecommercedemopair7.business.response.productChars.AddProductCharResponse;
 import com.etiya.ecommercedemopair7.business.response.productChars.GetProductCharResponse;
@@ -23,14 +24,14 @@ public class ProductCharManager implements IProductCharService {
 
     @Override
     public GetProductCharResponse getById(int productCharId) {
-        ProductChar productChar = getProductChar(productCharId);
+        ProductChar productChar = checkIfProductCharExistsById(productCharId);
         GetProductCharResponse response = modelMapperService.forResponse().map(productChar, GetProductCharResponse.class);
         return response;
     }
 
     @Override
     public ProductChar getByProductCharId(int productCharId) {
-        return getProductChar(productCharId);
+        return checkIfProductCharExistsById(productCharId);
     }
 
 
@@ -42,7 +43,13 @@ public class ProductCharManager implements IProductCharService {
         return response;
     }
 
-    private ProductChar getProductChar(int productCharId) {
-        return productCharRepository.findById(productCharId).orElseThrow();
+    private ProductChar checkIfProductCharExistsById(int productCharId) {
+        ProductChar currentProductChar;
+        try {
+            currentProductChar = productCharRepository.findById(productCharId).get();
+        } catch (Exception e) {
+            throw new RuntimeException(Messages.productCharNotFound);
+        }
+        return currentProductChar;
     }
 }

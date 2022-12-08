@@ -1,6 +1,7 @@
 package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.ICountryService;
+import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.business.response.countries.GetCountryResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.entities.concretes.Country;
@@ -28,7 +29,12 @@ public class CountryManager implements ICountryService {
     }
 
     private Country checkIfCountryExistsById(int id) {
-        Country currentCountry = this.countryRepository.findById(id).orElseThrow();
+        Country currentCountry;
+        try{
+            currentCountry    = this.countryRepository.findById(id).get();
+        } catch (Exception e) {
+            throw new RuntimeException(Messages.countryNotFound);
+        }
         return currentCountry;
     }
 }

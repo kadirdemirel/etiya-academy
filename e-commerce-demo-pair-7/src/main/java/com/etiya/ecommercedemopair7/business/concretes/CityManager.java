@@ -1,6 +1,7 @@
 package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.ICityService;
+import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.business.response.cities.GetCityResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.entities.concretes.City;
@@ -28,7 +29,12 @@ public class CityManager implements ICityService {
     }
 
     private City checkIfCityExistsById(int id) {
-        City currentCity = this.cityRepository.findById(id).orElseThrow();
+        City currentCity;
+        try {
+            currentCity = this.cityRepository.findById(id).get();
+        } catch (Exception e) {
+            throw new RuntimeException(Messages.cityNotFound);
+        }
         return currentCity;
     }
 }
