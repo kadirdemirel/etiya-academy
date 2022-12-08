@@ -1,6 +1,7 @@
 package com.etiya.ecommercedemopair7.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,5 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category")
-    @JsonBackReference
     private List<ProductCategory> productCategories;
 }
