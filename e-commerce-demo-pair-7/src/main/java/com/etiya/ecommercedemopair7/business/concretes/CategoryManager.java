@@ -78,7 +78,7 @@ public class CategoryManager implements ICategoryService {
         try {
             currentCategory = this.categoryRepository.findById(id).get();
         } catch (Exception e) {
-            throw new RuntimeException(Messages.existsByCategoryId);
+            throw new RuntimeException(Messages.categoryNotFound);
         }
         return currentCategory;
     }

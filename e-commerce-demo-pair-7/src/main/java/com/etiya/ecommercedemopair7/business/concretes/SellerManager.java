@@ -50,7 +50,7 @@ public class SellerManager implements ISellerService {
         try {
             currentSeller = this.sellerRepository.findById(sellerId).get();
         } catch (Exception e) {
-            throw new RuntimeException(Messages.existsBySellerId);
+            throw new RuntimeException(Messages.sellerNotFound);
         }
         return currentSeller;
     }
