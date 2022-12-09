@@ -4,12 +4,16 @@ import com.etiya.ecommercedemopair7.business.abstracts.IDeliveryOptionService;
 import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.business.request.deliveryOptions.AddDeliveryOptionRequest;
 import com.etiya.ecommercedemopair7.business.response.deliveryOptions.AddDeliveryOptionResponse;
+import com.etiya.ecommercedemopair7.business.response.deliveryOptions.GetAllDeliveryOptionResponse;
 import com.etiya.ecommercedemopair7.business.response.deliveryOptions.GetDeliveryOptionResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.entities.concretes.DeliveryOption;
 import com.etiya.ecommercedemopair7.repository.abstracts.IDeliveryOptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DeliveryOptionManager implements IDeliveryOptionService {
@@ -51,7 +55,14 @@ public class DeliveryOptionManager implements IDeliveryOptionService {
         DeliveryOption savedDeliveryOption = deliveryOptionRepository.save(deliveryOption);
 
         AddDeliveryOptionResponse response = modelMapperService.forResponse().map(savedDeliveryOption, AddDeliveryOptionResponse.class);
+        return response;
+    }
 
+    @Override
+    public List<GetAllDeliveryOptionResponse> getAll(){
+        List<DeliveryOption> deliveryOptions = this.deliveryOptionRepository.findAll();
+        List<GetAllDeliveryOptionResponse> response = deliveryOptions.stream().map(deliveryOption -> this.modelMapperService.forResponse()
+                .map(deliveryOption, GetAllDeliveryOptionResponse.class)).collect(Collectors.toList());
         return response;
 
     }

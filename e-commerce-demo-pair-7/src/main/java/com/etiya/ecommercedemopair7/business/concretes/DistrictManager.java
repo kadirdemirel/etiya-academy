@@ -2,12 +2,18 @@ package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.IDistrictService;
 import com.etiya.ecommercedemopair7.business.constants.Messages;
+import com.etiya.ecommercedemopair7.business.response.customers.GetAllCustomerResponse;
+import com.etiya.ecommercedemopair7.business.response.districts.GetAllDistrictResponse;
 import com.etiya.ecommercedemopair7.business.response.districts.GetDistrictResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
+import com.etiya.ecommercedemopair7.entities.concretes.Customer;
 import com.etiya.ecommercedemopair7.entities.concretes.District;
 import com.etiya.ecommercedemopair7.repository.abstracts.IDistrictRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DistrictManager implements IDistrictService {
@@ -25,6 +31,14 @@ public class DistrictManager implements IDistrictService {
     public GetDistrictResponse getById(int districtId) {
         District district = checkIfDistrictExistsById(districtId);
         GetDistrictResponse response = modelMapperService.forResponse().map(district, GetDistrictResponse.class);
+        return response;
+    }
+
+    @Override
+    public List<GetAllDistrictResponse> getAll(){
+        List<District> districts = this.districtRepository.findAll();
+        List<GetAllDistrictResponse> response = districts.stream().map(district -> this.modelMapperService.forResponse()
+                .map(district,GetAllDistrictResponse.class)).collect(Collectors.toList());
         return response;
     }
 

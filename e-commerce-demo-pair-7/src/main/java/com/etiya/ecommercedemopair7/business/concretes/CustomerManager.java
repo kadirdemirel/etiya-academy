@@ -1,12 +1,16 @@
 package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.ICustomerService;
+import com.etiya.ecommercedemopair7.business.response.customers.GetAllCustomerResponse;
 import com.etiya.ecommercedemopair7.business.response.customers.GetCustomerResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.entities.concretes.Customer;
 import com.etiya.ecommercedemopair7.repository.abstracts.ICustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CustomerManager implements ICustomerService {
@@ -24,6 +28,14 @@ public class CustomerManager implements ICustomerService {
     public GetCustomerResponse getById(int customerId) {
         Customer customer = checkIfCustomerExistsById(customerId);
         GetCustomerResponse response = modelMapperService.forResponse().map(customer, GetCustomerResponse.class);
+        return response;
+    }
+
+    @Override
+    public List<GetAllCustomerResponse> getAll(){
+        List<Customer> customers = this.customerRepository.findAll();
+        List<GetAllCustomerResponse> response = customers.stream().map(customer -> this.modelMapperService.forResponse()
+                .map(customer,GetAllCustomerResponse.class)).collect(Collectors.toList());
         return response;
     }
 

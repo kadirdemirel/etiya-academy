@@ -4,7 +4,9 @@ import com.etiya.ecommercedemopair7.business.abstracts.ICategoryService;
 import com.etiya.ecommercedemopair7.business.abstracts.IProductCategoryService;
 import com.etiya.ecommercedemopair7.business.abstracts.IProductService;
 import com.etiya.ecommercedemopair7.business.request.productCategories.AddProductCategoryRequest;
+import com.etiya.ecommercedemopair7.business.response.orders.GetAllOrderResponse;
 import com.etiya.ecommercedemopair7.business.response.productCategories.AddProductCategoryResponse;
+import com.etiya.ecommercedemopair7.business.response.productCategories.GetAllProductCategoryResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.entities.concretes.Category;
 import com.etiya.ecommercedemopair7.entities.concretes.Product;
@@ -12,6 +14,9 @@ import com.etiya.ecommercedemopair7.entities.concretes.ProductCategory;
 import com.etiya.ecommercedemopair7.repository.abstracts.IProductCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductCategoryManager implements IProductCategoryService {
@@ -47,6 +52,14 @@ public class ProductCategoryManager implements IProductCategoryService {
 
         ProductCategory savedProductCategory = productCategoryRepository.save(productCategory);
         AddProductCategoryResponse response = modelMapperService.forResponse().map(savedProductCategory, AddProductCategoryResponse.class);
+        return response;
+    }
+
+    @Override
+    public List<GetAllProductCategoryResponse> getAll(){
+        List<ProductCategory> productCategories = this.productCategoryRepository.findAll();
+        List<GetAllProductCategoryResponse> response = productCategories.stream().map(productCategory -> this.modelMapperService
+                .forResponse().map(productCategory, GetAllProductCategoryResponse.class)).collect(Collectors.toList());
         return response;
     }
 

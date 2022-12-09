@@ -3,11 +3,15 @@ package com.etiya.ecommercedemopair7.business.concretes;
 import com.etiya.ecommercedemopair7.business.abstracts.IPaymentTypeService;
 import com.etiya.ecommercedemopair7.business.request.paymentTypes.AddPaymentTypeRequest;
 import com.etiya.ecommercedemopair7.business.response.paymentTypes.AddPaymentTypeResponse;
+import com.etiya.ecommercedemopair7.business.response.paymentTypes.GetAllPaymentTypeResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.entities.concretes.PaymentType;
 import com.etiya.ecommercedemopair7.repository.abstracts.IPaymentTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PaymentTypeManager implements IPaymentTypeService {

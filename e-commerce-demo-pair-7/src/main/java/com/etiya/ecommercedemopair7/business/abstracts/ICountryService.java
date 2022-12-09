@@ -6,5 +6,6 @@ import com.etiya.ecommercedemopair7.business.response.countries.GetCountryRespon
 import java.util.List;
 
 public interface ICountryService {
+    List<GetAllCountryResponse> getAll();
     GetCountryResponse getById(int countryId);
 }

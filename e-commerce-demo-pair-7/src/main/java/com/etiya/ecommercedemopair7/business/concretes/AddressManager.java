@@ -7,6 +7,7 @@ import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.business.request.addresses.AddAddressRequest;
 import com.etiya.ecommercedemopair7.business.response.addresses.AddAddressResponse;
 import com.etiya.ecommercedemopair7.business.response.addresses.GetAddressResponse;
+import com.etiya.ecommercedemopair7.business.response.addresses.GetAllAddressResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.entities.concretes.Address;
 import com.etiya.ecommercedemopair7.entities.concretes.Street;
@@ -14,6 +15,9 @@ import com.etiya.ecommercedemopair7.entities.concretes.User;
 import com.etiya.ecommercedemopair7.repository.abstracts.IAddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AddressManager implements IAddressService {

@@ -2,12 +2,16 @@ package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.ICountryService;
 import com.etiya.ecommercedemopair7.business.constants.Messages;
+import com.etiya.ecommercedemopair7.business.response.countries.GetAllCountryResponse;
 import com.etiya.ecommercedemopair7.business.response.countries.GetCountryResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.entities.concretes.Country;
 import com.etiya.ecommercedemopair7.repository.abstracts.ICountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CountryManager implements ICountryService {
@@ -28,6 +32,14 @@ public class CountryManager implements ICountryService {
         return response;
     }
 
+    @Override
+    public List<GetAllCountryResponse> getAll(){
+        List<Country> countries = this.countryRepository.findAll();
+        List<GetAllCountryResponse> response = countries.stream().map(country -> this.modelMapperService
+                .forResponse().map(country,GetAllCountryResponse.class)).collect(Collectors.toList());
+        return response;
+    }
+
     private Country checkIfCountryExistsById(int id) {
         Country currentCountry;
         try{
@@ -36,5 +48,7 @@ public class CountryManager implements ICountryService {
             throw new RuntimeException(Messages.countryNotFound);
         }
         return currentCountry;
+
+
     }
 }
