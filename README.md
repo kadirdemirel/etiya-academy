@@ -13,6 +13,7 @@
 - Spring Boot
 - N-Tier Architecture
 - JPA/Hibernate
+- Model Mapper
 - Maven
 - Lombok
 - PostgreSQL
