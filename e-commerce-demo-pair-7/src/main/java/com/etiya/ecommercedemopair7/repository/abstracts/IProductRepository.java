@@ -8,4 +8,5 @@ public interface IProductRepository extends JpaRepository<Product, Integer> {
     Product findByName(String name);
     @Query("SELECT p from Product as p where p.name=:name")
     Product customFindByName(String name);
+    Product findById(int productId);
 }

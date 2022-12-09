@@ -4,11 +4,15 @@ import com.etiya.ecommercedemopair7.business.abstracts.IIndividualCustomerServic
 import com.etiya.ecommercedemopair7.business.request.individualCustomers.AddIndividualCustomerRequest;
 import com.etiya.ecommercedemopair7.business.response.corporateCustomers.AddCorporateCustomerResponse;
 import com.etiya.ecommercedemopair7.business.response.individualCustomers.AddIndividualCustomerResponse;
+import com.etiya.ecommercedemopair7.business.response.individualCustomers.GetAllIndividualCustomerResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.entities.concretes.IndividualCustomer;
 import com.etiya.ecommercedemopair7.repository.abstracts.IIndividualCustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class IndividualCustomerManager implements IIndividualCustomerService {

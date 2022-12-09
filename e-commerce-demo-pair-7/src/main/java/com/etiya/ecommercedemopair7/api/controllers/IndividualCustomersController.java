@@ -4,6 +4,7 @@ import com.etiya.ecommercedemopair7.business.abstracts.IIndividualCustomerServic
 import com.etiya.ecommercedemopair7.business.constants.Paths;
 import com.etiya.ecommercedemopair7.business.request.individualCustomers.AddIndividualCustomerRequest;
 import com.etiya.ecommercedemopair7.business.response.individualCustomers.AddIndividualCustomerResponse;
+import com.etiya.ecommercedemopair7.business.response.individualCustomers.GetAllIndividualCustomerResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,10 @@ public class IndividualCustomersController {
 
     public IndividualCustomersController(IIndividualCustomerService individualCustomerService) {
         this.individualCustomerService = individualCustomerService;
+    }
+    @GetMapping("/getall")
+    public List<GetAllIndividualCustomerResponse> getAll(){
+        return this.individualCustomerService.getAll();
     }
 
     @PostMapping("/add")
