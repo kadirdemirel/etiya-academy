@@ -14,4 +14,5 @@ public class Messages {
     public static final String countryNotFound = "İlgili ülke bulunamadı.";
     public static final String cityNotFound = "İlgili şehir bulunamadı.";
     public static final String addressNotFound = "İlgili adres bulunamadı.";
+    public static final String orderNotFound = "İlgili sipariş bulunamadı";
 }

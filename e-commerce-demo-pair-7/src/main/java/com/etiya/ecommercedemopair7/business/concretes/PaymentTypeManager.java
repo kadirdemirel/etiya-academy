@@ -32,4 +32,12 @@ public class PaymentTypeManager implements IPaymentTypeService {
         return response;
     }
 
+    @Override
+    public List<GetAllPaymentTypeResponse> getAll(){
+        List<PaymentType> paymentTypes = this.paymentTypeRepository.findAll();
+        List<GetAllPaymentTypeResponse> response = paymentTypes.stream().map(paymentType -> this.modelMapperService
+                .forResponse().map(paymentType, GetAllPaymentTypeResponse.class)).collect(Collectors.toList());
+        return response;
+    }
+
 }

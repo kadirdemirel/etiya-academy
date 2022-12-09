@@ -25,6 +25,14 @@ public class IndividualCustomerManager implements IIndividualCustomerService {
         this.individualCustomerRepository = individualCustomerRepository;
         this.modelMapperService = modelMapperService;
     }
+    @Override
+    public List<GetAllIndividualCustomerResponse> getAll(){
+        List<IndividualCustomer> individualCustomers = individualCustomerRepository.findAll();
+        List<GetAllIndividualCustomerResponse> response = individualCustomers.stream()
+                .map(individualCustomer -> this.modelMapperService.forResponse()
+                        .map(individualCustomer,GetAllIndividualCustomerResponse.class)).collect(Collectors.toList());
+        return response;
+    }
 
     @Override
     public AddIndividualCustomerResponse add(AddIndividualCustomerRequest addIndividualCustomerRequest) {

@@ -7,5 +7,7 @@ import com.etiya.ecommercedemopair7.business.response.individualCustomers.GetAll
 import java.util.List;
 
 public interface IIndividualCustomerService {
+
+    List<GetAllIndividualCustomerResponse> getAll();
     AddIndividualCustomerResponse add(AddIndividualCustomerRequest addIndividualCustomerRequest);
 }
