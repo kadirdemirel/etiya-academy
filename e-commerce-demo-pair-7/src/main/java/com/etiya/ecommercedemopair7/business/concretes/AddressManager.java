@@ -57,6 +57,14 @@ public class AddressManager implements IAddressService {
         return response;
     }
 
+    @Override
+    public List<GetAllAddressResponse> getAll(){
+        List<Address> addresses = this.addressRepository.findAll();
+        List<GetAllAddressResponse> response = addresses.stream().map(address -> this.modelMapperService.forResponse()
+                .map(address,GetAllAddressResponse.class)).collect(Collectors.toList());
+        return response;
+    }
+
     private User getUser(int userId) {
         User user = userService.getByUserId(userId);
         return user;

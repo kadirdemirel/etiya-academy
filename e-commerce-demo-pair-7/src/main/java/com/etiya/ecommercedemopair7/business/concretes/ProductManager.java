@@ -70,7 +70,7 @@ public class ProductManager implements IProductService {
     private Product existsByProductId(int productId) {
         Product currentProduct;
         try {
-            currentProduct = this.productRepository.findById(productId).get();
+            currentProduct = this.productRepository.findById(productId);
         } catch (Exception e) {
             throw new RuntimeException(Messages.productNotFound);
         }

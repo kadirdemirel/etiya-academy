@@ -5,7 +5,6 @@ import com.etiya.ecommercedemopair7.business.response.products.AddProductRespons
 import com.etiya.ecommercedemopair7.business.response.products.GetAllProductResponse;
 import com.etiya.ecommercedemopair7.business.response.products.GetProductResponse;
 import com.etiya.ecommercedemopair7.entities.concretes.Product;
-
 import java.util.List;
 
 public interface IProductService {
