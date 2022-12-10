@@ -9,11 +9,12 @@ import com.etiya.ecommercedemopair7.business.response.orders.AddOrderResponse;
 import com.etiya.ecommercedemopair7.business.response.orders.GetAllOrderResponse;
 import com.etiya.ecommercedemopair7.business.response.orders.GetOrderResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
+import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
+import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.Address;
 import com.etiya.ecommercedemopair7.entities.concretes.DeliveryOption;
 import com.etiya.ecommercedemopair7.entities.concretes.Order;
 import com.etiya.ecommercedemopair7.repository.abstracts.IOrderRepository;
-import org.aspectj.bridge.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +30,6 @@ public class OrderManager implements IOrderService {
     private IModelMapperService modelMapperService;
 
 
-
-
     @Autowired
     public OrderManager(IOrderRepository orderRepository, IDeliveryOptionService deliveryOptionService, IAddressService addressService, IModelMapperService modelMapperService) {
         this.orderRepository = orderRepository;
@@ -38,29 +37,31 @@ public class OrderManager implements IOrderService {
         this.addressService = addressService;
         this.modelMapperService = modelMapperService;
     }
-   @Override
-    public List<GetAllOrderResponse> getAll(){
+
+    @Override
+    public DataResult<List<GetAllOrderResponse>> getAll() {
         List<Order> orders = this.orderRepository.findAll();
         List<GetAllOrderResponse> response = orders.stream()
                 .map(order -> this.modelMapperService.forResponse().map(order, GetAllOrderResponse.class))
                 .collect(Collectors.toList());
-        return response;
-    }
-    @Override
-    public GetOrderResponse getById(int orderId){
-        Order order = existByOrderId(orderId);
-        GetOrderResponse response = modelMapperService.forResponse().map(order, GetOrderResponse.class);
-        return response;
+        return new SuccessDataResult<>(response, Messages.Order.ordersListed);
     }
 
     @Override
-    public Order getByOrderId(int orderId){
+    public DataResult<GetOrderResponse> getById(int orderId) {
+        Order order = existByOrderId(orderId);
+        GetOrderResponse response = modelMapperService.forResponse().map(order, GetOrderResponse.class);
+        return new SuccessDataResult<>(response, Messages.Order.orderReceived);
+    }
+
+    @Override
+    public Order getByOrderId(int orderId) {
         return existByOrderId(orderId);
     }
 
 
     @Override
-    public AddOrderResponse add(AddOrderRequest addOrderRequest) {
+    public DataResult<AddOrderResponse> add(AddOrderRequest addOrderRequest) {
         getDeliveryOption(addOrderRequest.getDeliveryOptionId());
         getOrderAddress(addOrderRequest.getOrderAddressId());
         getInvoiceAddress(addOrderRequest.getInvoiceAddressId());
@@ -68,7 +69,7 @@ public class OrderManager implements IOrderService {
         Order savedOrder = orderRepository.save(order);
 
         AddOrderResponse response = modelMapperService.forResponse().map(savedOrder, AddOrderResponse.class);
-        return response;
+        return new SuccessDataResult<>(response, Messages.Order.orderAdded);
 
     }
 
@@ -86,12 +87,13 @@ public class OrderManager implements IOrderService {
         DeliveryOption deliveryOption = deliveryOptionService.getByDeliveryOptionId(deliveryOptionId);
         return deliveryOption;
     }
-    private Order existByOrderId(int id){
+
+    private Order existByOrderId(int id) {
         Order currentOrder;
-        try{
-            currentOrder=this.orderRepository.findById(id).get();
-        }catch (Exception ex){
-            throw new RuntimeException(Messages.orderNotFound);
+        try {
+            currentOrder = this.orderRepository.findById(id).get();
+        } catch (Exception ex) {
+            throw new RuntimeException(Messages.Order.orderNotFound);
         }
         return currentOrder;
     }

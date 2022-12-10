@@ -4,6 +4,8 @@ import com.etiya.ecommercedemopair7.business.abstracts.IStreetService;
 import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.business.response.streets.GetStreetResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
+import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
+import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.Street;
 import com.etiya.ecommercedemopair7.repository.abstracts.IStreetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +23,10 @@ public class StreetManager implements IStreetService {
     }
 
     @Override
-    public GetStreetResponse getById(int streetId) {
+    public DataResult<GetStreetResponse> getById(int streetId) {
         Street seller = checkIfStreetExistsById(streetId);
         GetStreetResponse response = modelMapperService.forResponse().map(seller, GetStreetResponse.class);
-        return response;
-
+        return new SuccessDataResult<>(response, Messages.Street.streetReceived);
     }
 
     @Override
@@ -36,9 +37,9 @@ public class StreetManager implements IStreetService {
     private Street checkIfStreetExistsById(int id) {
         Street currentStreet;
         try {
-            currentStreet  = this.streetRepository.findById(id).get();
+            currentStreet = this.streetRepository.findById(id).get();
         } catch (Exception e) {
-            throw new RuntimeException(Messages.streetNotFound);
+            throw new RuntimeException(Messages.Street.streetNotFound);
         }
         return currentStreet;
     }

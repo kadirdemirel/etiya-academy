@@ -2,12 +2,18 @@ package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.IUserService;
 import com.etiya.ecommercedemopair7.business.constants.Messages;
+import com.etiya.ecommercedemopair7.business.response.users.GetAllUserResponse;
 import com.etiya.ecommercedemopair7.business.response.users.GetUserResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
+import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
+import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.User;
 import com.etiya.ecommercedemopair7.repository.abstracts.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserManager implements IUserService {
@@ -21,10 +27,19 @@ public class UserManager implements IUserService {
     }
 
     @Override
-    public GetUserResponse getById(int id) {
+    public DataResult<List<GetAllUserResponse>> getAll() {
+        List<User> users = userRepository.findAll();
+        List<GetAllUserResponse> response = users.stream()
+                .map(user -> modelMapperService.forResponse().map(user, GetAllUserResponse.class))
+                .collect(Collectors.toList());
+        return new SuccessDataResult<>(response, Messages.User.usersListed);
+    }
+
+    @Override
+    public DataResult<GetUserResponse> getById(int id) {
         User user = checkIfUserExistsById(id);
         GetUserResponse response = modelMapperService.forResponse().map(user, GetUserResponse.class);
-        return response;
+        return new SuccessDataResult<>(response, Messages.User.userReceived);
     }
 
     @Override
@@ -37,7 +52,7 @@ public class UserManager implements IUserService {
         try {
             currentUser = this.userRepository.findById(id).orElseThrow();
         } catch (Exception e) {
-            throw new RuntimeException(Messages.userNotFound);
+            throw new RuntimeException(Messages.User.userNotFound);
         }
         return currentUser;
     }

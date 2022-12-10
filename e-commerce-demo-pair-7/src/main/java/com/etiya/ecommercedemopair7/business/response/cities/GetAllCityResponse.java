@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class GetAllCityResponse {
     private int id;
     private String name;
+    private int countryId;
 }

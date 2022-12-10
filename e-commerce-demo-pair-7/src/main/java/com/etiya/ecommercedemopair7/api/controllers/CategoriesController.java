@@ -6,6 +6,7 @@ import com.etiya.ecommercedemopair7.business.request.categories.AddCategoryReque
 import com.etiya.ecommercedemopair7.business.response.categories.AddCategoryResponse;
 import com.etiya.ecommercedemopair7.business.response.categories.GetAllCategoryResponse;
 import com.etiya.ecommercedemopair7.business.response.categories.GetCategoryResponse;
+import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,28 +27,28 @@ public class CategoriesController {
     }
 
     @GetMapping("/getall")
-    public List<GetAllCategoryResponse> getAll() {
+    public DataResult<List<GetAllCategoryResponse>> getAll() {
         return this.categoryService.getAll();
     }
 
     @GetMapping("/geybyid")
-    public GetCategoryResponse getById(@RequestParam int categoryId) {
+    public DataResult<GetCategoryResponse> getById(@RequestParam int categoryId) {
         return this.categoryService.getById(categoryId);
     }
 
     @GetMapping("get-by-name")
-    public Category getByName(@RequestParam("name") String name) {
+    public DataResult<Category> getByName(@RequestParam("name") String name) {
         return categoryService.getByName(name);
     }
 
     @GetMapping("custom-get-by-name")
-    public Category customGetByName(@RequestParam("name") String name) {
+    public DataResult<Category> customGetByName(@RequestParam("name") String name) {
         return categoryService.customGetByName(name);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<AddCategoryResponse> add(@RequestBody AddCategoryRequest addCategoryRequest) {
-        return new ResponseEntity<AddCategoryResponse>(categoryService.add(addCategoryRequest), HttpStatus.CREATED);
+    public ResponseEntity<?> add(@RequestBody AddCategoryRequest addCategoryRequest) {
+        return new ResponseEntity<>(categoryService.add(addCategoryRequest), HttpStatus.CREATED);
     }
 
 }

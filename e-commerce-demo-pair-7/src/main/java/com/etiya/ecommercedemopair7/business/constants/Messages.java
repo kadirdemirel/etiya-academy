@@ -74,6 +74,7 @@ public class Messages {
         public static final String ordersListed = "Siparişler başarıyla listelendi";
         public static final String orderReceived = "Sipariş başarıyla gösterildi";
         public static final String orderAdded = "Sipariş başarıyla eklendi";
+        public static final String orderNotFound = "İlgili sipariş bulunamadı.";
     }
 
     public static class PaymentType {
@@ -115,6 +116,9 @@ public class Messages {
         public static final String sellerAdded = "Satıcı başarıyla eklendi";
     }
 
+    public  static class SellerProduct {
+        public static final String sellerProductAdded="Satıcı ürünü başarıyla ekledi";
+    }
     public static class Street {
         public static final String streetNotFound = "İlgili sokak bulunamadı.";
         public static final String streetsListed = "Sokaklar başarıyla listelendi";

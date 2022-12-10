@@ -6,6 +6,8 @@ import com.etiya.ecommercedemopair7.business.response.customers.GetAllCustomerRe
 import com.etiya.ecommercedemopair7.business.response.districts.GetAllDistrictResponse;
 import com.etiya.ecommercedemopair7.business.response.districts.GetDistrictResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
+import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
+import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.Customer;
 import com.etiya.ecommercedemopair7.entities.concretes.District;
 import com.etiya.ecommercedemopair7.repository.abstracts.IDistrictRepository;
@@ -28,26 +30,26 @@ public class DistrictManager implements IDistrictService {
     }
 
     @Override
-    public GetDistrictResponse getById(int districtId) {
+    public DataResult<GetDistrictResponse> getById(int districtId) {
         District district = checkIfDistrictExistsById(districtId);
         GetDistrictResponse response = modelMapperService.forResponse().map(district, GetDistrictResponse.class);
-        return response;
+        return new SuccessDataResult<>(response, Messages.District.districtReceived);
     }
 
     @Override
-    public List<GetAllDistrictResponse> getAll(){
+    public DataResult<List<GetAllDistrictResponse>> getAll() {
         List<District> districts = this.districtRepository.findAll();
         List<GetAllDistrictResponse> response = districts.stream().map(district -> this.modelMapperService.forResponse()
-                .map(district,GetAllDistrictResponse.class)).collect(Collectors.toList());
-        return response;
+                .map(district, GetAllDistrictResponse.class)).collect(Collectors.toList());
+        return new SuccessDataResult<>(response, Messages.District.districtsListed);
     }
 
     private District checkIfDistrictExistsById(int id) {
         District currentDistrict;
-        try{
-          currentDistrict=  this.districtRepository.findById(id).get();
+        try {
+            currentDistrict = this.districtRepository.findById(id).get();
         } catch (Exception e) {
-            throw new RuntimeException(Messages.districtNotFound);
+            throw new RuntimeException(Messages.District.districtNotFound);
         }
         return currentDistrict;
     }

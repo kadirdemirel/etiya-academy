@@ -3,11 +3,14 @@ package com.etiya.ecommercedemopair7.business.concretes;
 import com.etiya.ecommercedemopair7.business.abstracts.ICategoryService;
 import com.etiya.ecommercedemopair7.business.abstracts.IProductCategoryService;
 import com.etiya.ecommercedemopair7.business.abstracts.IProductService;
+import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.business.request.productCategories.AddProductCategoryRequest;
 import com.etiya.ecommercedemopair7.business.response.orders.GetAllOrderResponse;
 import com.etiya.ecommercedemopair7.business.response.productCategories.AddProductCategoryResponse;
 import com.etiya.ecommercedemopair7.business.response.productCategories.GetAllProductCategoryResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
+import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
+import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.Category;
 import com.etiya.ecommercedemopair7.entities.concretes.Product;
 import com.etiya.ecommercedemopair7.entities.concretes.ProductCategory;
@@ -15,6 +18,7 @@ import com.etiya.ecommercedemopair7.repository.abstracts.IProductCategoryReposit
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,32 +39,32 @@ public class ProductCategoryManager implements IProductCategoryService {
     }
 
     @Override
-    public ProductCategory getByCategoryId(int categoryId) {
-        return this.productCategoryRepository.findByCategoryId(categoryId);
+    public DataResult<ProductCategory> getByCategoryId(int categoryId) {
+        return new SuccessDataResult<>(this.productCategoryRepository.findByCategoryId(categoryId), Messages.ProductCategory.productCategoryReceived);
     }
 
     @Override
-    public ProductCategory getByProductId(int productId) {
-        return this.productCategoryRepository.findByProductId(productId);
+    public DataResult<ProductCategory> getByProductId(int productId) {
+        return new SuccessDataResult<>(this.productCategoryRepository.findByCategoryId(productId), Messages.ProductCategory.productCategoryReceived);
     }
 
     @Override
-    public AddProductCategoryResponse add(AddProductCategoryRequest addProductCategoryRequest) {
+    public DataResult<AddProductCategoryResponse> add(AddProductCategoryRequest addProductCategoryRequest) {
         existsByCategory(addProductCategoryRequest);
         existsByProduct(addProductCategoryRequest);
         ProductCategory productCategory = modelMapperService.forRequest().map(addProductCategoryRequest, ProductCategory.class);
 
         ProductCategory savedProductCategory = productCategoryRepository.save(productCategory);
         AddProductCategoryResponse response = modelMapperService.forResponse().map(savedProductCategory, AddProductCategoryResponse.class);
-        return response;
+        return new SuccessDataResult<>(response, Messages.ProductCategory.productCategoryAdded);
     }
 
     @Override
-    public List<GetAllProductCategoryResponse> getAll(){
+    public DataResult<List<GetAllProductCategoryResponse>> getAll() {
         List<ProductCategory> productCategories = this.productCategoryRepository.findAll();
         List<GetAllProductCategoryResponse> response = productCategories.stream().map(productCategory -> this.modelMapperService
                 .forResponse().map(productCategory, GetAllProductCategoryResponse.class)).collect(Collectors.toList());
-        return response;
+        return new SuccessDataResult<>(response, Messages.ProductCategory.productCategoriesListed);
     }
 
     private Product existsByProduct(AddProductCategoryRequest addProductCategoryRequest) {

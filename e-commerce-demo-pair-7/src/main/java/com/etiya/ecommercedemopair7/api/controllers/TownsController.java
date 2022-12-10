@@ -3,6 +3,7 @@ package com.etiya.ecommercedemopair7.api.controllers;
 import com.etiya.ecommercedemopair7.business.abstracts.ITownService;
 import com.etiya.ecommercedemopair7.business.constants.Paths;
 import com.etiya.ecommercedemopair7.business.response.towns.GetTownResponse;
+import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,7 @@ public class TownsController {
     }
 
     @GetMapping("/{id}")
-    public GetTownResponse getById(@PathVariable int id) {
+    public DataResult<GetTownResponse> getById(@PathVariable int id) {
         return this.townService.getById(id);
     }
 }

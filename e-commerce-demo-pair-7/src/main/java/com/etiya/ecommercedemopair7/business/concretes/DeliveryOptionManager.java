@@ -7,6 +7,8 @@ import com.etiya.ecommercedemopair7.business.response.deliveryOptions.AddDeliver
 import com.etiya.ecommercedemopair7.business.response.deliveryOptions.GetAllDeliveryOptionResponse;
 import com.etiya.ecommercedemopair7.business.response.deliveryOptions.GetDeliveryOptionResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
+import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
+import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.DeliveryOption;
 import com.etiya.ecommercedemopair7.repository.abstracts.IDeliveryOptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +30,10 @@ public class DeliveryOptionManager implements IDeliveryOptionService {
     }
 
     @Override
-    public GetDeliveryOptionResponse getById(int id) {
+    public DataResult<GetDeliveryOptionResponse> getById(int id) {
         DeliveryOption deliveryOption = getDeliveryOption(id);
         GetDeliveryOptionResponse response = modelMapperService.forResponse().map(deliveryOption, GetDeliveryOptionResponse.class);
-        return response;
+        return new SuccessDataResult<>(response, Messages.DeliveryOption.deliveryOptionReceived);
     }
 
     @Override
@@ -44,26 +46,26 @@ public class DeliveryOptionManager implements IDeliveryOptionService {
         try {
             currentDeliveryOption = deliveryOptionRepository.findById(id).get();
         } catch (Exception e) {
-            throw new RuntimeException(Messages.deliveryOptionNotFound);
+            throw new RuntimeException(Messages.DeliveryOption.deliveryOptionNotFound);
         }
         return currentDeliveryOption;
     }
 
     @Override
-    public AddDeliveryOptionResponse add(AddDeliveryOptionRequest addDeliveryOptionRequest) {
+    public DataResult<AddDeliveryOptionResponse> add(AddDeliveryOptionRequest addDeliveryOptionRequest) {
         DeliveryOption deliveryOption = modelMapperService.forRequest().map(addDeliveryOptionRequest, DeliveryOption.class);
         DeliveryOption savedDeliveryOption = deliveryOptionRepository.save(deliveryOption);
 
         AddDeliveryOptionResponse response = modelMapperService.forResponse().map(savedDeliveryOption, AddDeliveryOptionResponse.class);
-        return response;
+        return new SuccessDataResult<>(response, Messages.DeliveryOption.deliveryOptionAdded);
     }
 
     @Override
-    public List<GetAllDeliveryOptionResponse> getAll(){
+    public DataResult<List<GetAllDeliveryOptionResponse>> getAll() {
         List<DeliveryOption> deliveryOptions = this.deliveryOptionRepository.findAll();
         List<GetAllDeliveryOptionResponse> response = deliveryOptions.stream().map(deliveryOption -> this.modelMapperService.forResponse()
                 .map(deliveryOption, GetAllDeliveryOptionResponse.class)).collect(Collectors.toList());
-        return response;
+        return new SuccessDataResult<>(response, Messages.DeliveryOption.deliveryOptionsListed);
 
     }
 }

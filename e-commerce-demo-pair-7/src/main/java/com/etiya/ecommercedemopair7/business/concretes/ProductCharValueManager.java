@@ -2,9 +2,12 @@ package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.IProductCharService;
 import com.etiya.ecommercedemopair7.business.abstracts.IProductCharValueService;
+import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.business.request.productCharValues.AddProductCharValueRequest;
 import com.etiya.ecommercedemopair7.business.response.productCharValues.AddProductCharValueResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
+import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
+import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.ProductChar;
 import com.etiya.ecommercedemopair7.entities.concretes.ProductCharValue;
 import com.etiya.ecommercedemopair7.repository.abstracts.IProductCharValueRepository;
@@ -26,13 +29,13 @@ public class ProductCharValueManager implements IProductCharValueService {
     }
 
     @Override
-    public AddProductCharValueResponse add(AddProductCharValueRequest addProductCharValueRequest) {
+    public DataResult<AddProductCharValueResponse> add(AddProductCharValueRequest addProductCharValueRequest) {
         getProductChar(addProductCharValueRequest);
         ProductCharValue productCharValue = modelMapperService.forRequest().map(addProductCharValueRequest, ProductCharValue.class);
 
         ProductCharValue savedProductCharValue = productCharValueRepository.save((productCharValue));
         AddProductCharValueResponse response = modelMapperService.forResponse().map(savedProductCharValue, AddProductCharValueResponse.class);
-        return response;
+        return new SuccessDataResult<>(response, Messages.ProductCharValue.productCharValueAdded);
     }
 
     private ProductChar getProductChar(AddProductCharValueRequest addProductCharValueRequest) {

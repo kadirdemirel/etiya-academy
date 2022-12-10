@@ -3,7 +3,6 @@ package com.etiya.ecommercedemopair7.api.controllers;
 import com.etiya.ecommercedemopair7.business.abstracts.ISellerProductService;
 import com.etiya.ecommercedemopair7.business.constants.Paths;
 import com.etiya.ecommercedemopair7.business.request.sellerProducts.AddSellerProductRequest;
-import com.etiya.ecommercedemopair7.business.response.sellerProducts.AddSellerProductResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,7 @@ public class SellerProductsController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<AddSellerProductResponse> add(@RequestBody @Valid AddSellerProductRequest addSellerProductRequest) {
-        return new ResponseEntity<AddSellerProductResponse>(sellerProductService.add(addSellerProductRequest), HttpStatus.CREATED);
+    public ResponseEntity<?> add(@RequestBody @Valid AddSellerProductRequest addSellerProductRequest) {
+        return new ResponseEntity<>(sellerProductService.add(addSellerProductRequest), HttpStatus.CREATED);
     }
 }

@@ -4,10 +4,12 @@ import com.etiya.ecommercedemopair7.business.request.corporateCustomers.AddCorpo
 import com.etiya.ecommercedemopair7.business.response.basketItems.GetAllBasketItemResponse;
 import com.etiya.ecommercedemopair7.business.response.corporateCustomers.AddCorporateCustomerResponse;
 import com.etiya.ecommercedemopair7.business.response.corporateCustomers.GetAllCorporateCustomerResponse;
+import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 
 import java.util.List;
 
 public interface ICorporateCustomerService {
-    AddCorporateCustomerResponse add(AddCorporateCustomerRequest addCorporateCustomerRequest);
-    List<GetAllCorporateCustomerResponse> getAll();
+    DataResult<AddCorporateCustomerResponse> add(AddCorporateCustomerRequest addCorporateCustomerRequest);
+
+    DataResult<List<GetAllCorporateCustomerResponse>> getAll();
 }

@@ -4,6 +4,8 @@ import com.etiya.ecommercedemopair7.business.abstracts.ITownService;
 import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.business.response.towns.GetTownResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
+import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
+import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.Town;
 import com.etiya.ecommercedemopair7.repository.abstracts.ITownRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,10 @@ public class TownManager implements ITownService {
     }
 
     @Override
-    public GetTownResponse getById(int townId) {
+    public DataResult<GetTownResponse> getById(int townId) {
         Town town = checkIfTownExistsById(townId);
         GetTownResponse response = modelMapperService.forResponse().map(town, GetTownResponse.class);
-        return response;
+        return new SuccessDataResult<>(response, Messages.Town.townReceived);
     }
 
     private Town checkIfTownExistsById(int id) {
@@ -33,7 +35,7 @@ public class TownManager implements ITownService {
         try {
             currentTown = this.townRepository.findById(id).orElseThrow();
         } catch (Exception e) {
-            throw new RuntimeException(Messages.townNotFound);
+            throw new RuntimeException(Messages.Town.townNotFound);
         }
         return currentTown;
     }

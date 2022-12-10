@@ -4,21 +4,22 @@ import com.etiya.ecommercedemopair7.business.request.categories.AddCategoryReque
 import com.etiya.ecommercedemopair7.business.response.categories.AddCategoryResponse;
 import com.etiya.ecommercedemopair7.business.response.categories.GetAllCategoryResponse;
 import com.etiya.ecommercedemopair7.business.response.categories.GetCategoryResponse;
+import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.Category;
 
 import java.util.List;
 
 public interface ICategoryService {
-    List<GetAllCategoryResponse> getAll();
+    DataResult<List<GetAllCategoryResponse>> getAll();
 
-    GetCategoryResponse getById(int categoryId);
+    DataResult<GetCategoryResponse> getById(int categoryId);
 
-    Category getByName(String name);
+    DataResult<Category> getByName(String name);
 
-    Category customGetByName(String name);
+    DataResult<Category> customGetByName(String name);
 
-    AddCategoryResponse add(AddCategoryRequest addCategoryRequest);
+    DataResult<AddCategoryResponse> add(AddCategoryRequest addCategoryRequest);
 
-    Category getByCategoryId(int categoryId);
+   Category getByCategoryId(int categoryId);
 
 }

@@ -7,6 +7,8 @@ import com.etiya.ecommercedemopair7.business.response.products.AddProductRespons
 import com.etiya.ecommercedemopair7.business.response.products.GetAllProductResponse;
 import com.etiya.ecommercedemopair7.business.response.products.GetProductResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
+import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
+import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.Product;
 import com.etiya.ecommercedemopair7.repository.abstracts.IProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,20 +30,20 @@ public class ProductManager implements IProductService {
     }
 
     @Override
-    public List<GetAllProductResponse> getAll() {
+    public DataResult<List<GetAllProductResponse>> getAll() {
 
         List<Product> products = this.productRepository.findAll();
         List<GetAllProductResponse> response = products.stream()
                 .map(product -> this.modelMapperService.forResponse().map(product, GetAllProductResponse.class))
                 .collect(Collectors.toList());
-        return response;
+        return new SuccessDataResult<>(response, Messages.Product.productsListed);
     }
 
     @Override
-    public GetProductResponse getById(int productId) {
+    public DataResult<GetProductResponse> getById(int productId) {
         Product product = existsByProductId(productId);
         GetProductResponse response = modelMapperService.forResponse().map(product, GetProductResponse.class);
-        return response;
+        return new SuccessDataResult<>(response, Messages.Product.productReceived);
     }
 
     @Override
@@ -50,21 +52,22 @@ public class ProductManager implements IProductService {
     }
 
     @Override
-    public Product getByName(String name) {
-        return productRepository.findByName(name);
+    public DataResult<Product> getByName(String name) {
+        return new SuccessDataResult<>(productRepository.findByName(name), Messages.Product.productReceived);
     }
 
     @Override
-    public Product customGetByName(String name) {
-        return productRepository.customFindByName(name);
+    public DataResult<Product> customGetByName(String name) {
+        return new SuccessDataResult<>(productRepository.customFindByName(name), Messages.Product.productReceived);
+
     }
 
     @Override
-    public AddProductResponse add(AddProductRequest addProductRequest) {
+    public DataResult<AddProductResponse> add(AddProductRequest addProductRequest) {
         Product product = modelMapperService.forRequest().map(addProductRequest, Product.class);
         Product savedProduct = productRepository.save(product);
         AddProductResponse response = modelMapperService.forResponse().map(savedProduct, AddProductResponse.class);
-        return response;
+        return new SuccessDataResult<>(response, Messages.Product.productAdded);
     }
 
     private Product existsByProductId(int productId) {
@@ -72,7 +75,7 @@ public class ProductManager implements IProductService {
         try {
             currentProduct = this.productRepository.findById(productId);
         } catch (Exception e) {
-            throw new RuntimeException(Messages.productNotFound);
+            throw new RuntimeException(Messages.Product.productNotFound);
         }
         return currentProduct;
     }
