@@ -14,6 +14,7 @@ import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.Address;
 import com.etiya.ecommercedemopair7.entities.concretes.DeliveryOption;
 import com.etiya.ecommercedemopair7.entities.concretes.Order;
+import com.etiya.ecommercedemopair7.entities.dtos.OrderDto;
 import com.etiya.ecommercedemopair7.repository.abstracts.IOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,14 @@ public class OrderManager implements IOrderService {
         Order order = existByOrderId(orderId);
         GetOrderResponse response = modelMapperService.forResponse().map(order, GetOrderResponse.class);
         return new SuccessDataResult<>(response, Messages.Order.orderReceived);
+    }
+
+    @Override
+    public DataResult<List<OrderDto>> getOrderDto() {
+        //TODO:Dto in dto mapping
+        List<Order> orders = orderRepository.findAll();
+        List<OrderDto> response = orders.stream().map(order -> modelMapperService.forResponse().map(order, OrderDto.class)).collect(Collectors.toList());
+        return new SuccessDataResult<>(response, Messages.Order.ordersListed);
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.etiya.ecommercedemopair7.business.request.orders.AddOrderRequest;
 import com.etiya.ecommercedemopair7.business.response.orders.GetAllOrderResponse;
 import com.etiya.ecommercedemopair7.business.response.orders.GetOrderResponse;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
+import com.etiya.ecommercedemopair7.entities.dtos.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,11 @@ public class OrdersController {
     @GetMapping("/get-all")
     public DataResult<List<GetAllOrderResponse>> getAll() {
         return this.orderService.getAll();
+    }
+
+    @GetMapping("/get-all-dto")
+    public DataResult<List<OrderDto>> getOrderDto() {
+        return this.orderService.getOrderDto();
     }
 
     @GetMapping("/get-by-id")

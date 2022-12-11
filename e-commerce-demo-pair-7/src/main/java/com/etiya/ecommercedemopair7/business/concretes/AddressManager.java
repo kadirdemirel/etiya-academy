@@ -62,9 +62,12 @@ public class AddressManager implements IAddressService {
 
     @Override
     public DataResult<List<AddressDto>> getAddressDto() {
+        //TODO:Country Name null
         List<Address> addresses = this.addressRepository.findAll();
-        List<AddressDto> response = addresses.stream().map(address -> modelMapperService.forResponse().map(address, AddressDto.class)).collect(Collectors.toList());
+        List<AddressDto> response = addresses.stream().map(address -> modelMapperService.forResponse()
+                .map(address, AddressDto.class)).collect(Collectors.toList());
         return new SuccessDataResult<>(response, Messages.Address.addressesListed);
+
     }
 
     @Override

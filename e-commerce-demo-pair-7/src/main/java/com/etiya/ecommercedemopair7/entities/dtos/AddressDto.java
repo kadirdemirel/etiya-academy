@@ -16,4 +16,5 @@ public class AddressDto {
     private String townName;
     private String cityName;
     private String countryName;
+    private String email;
 }
