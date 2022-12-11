@@ -32,7 +32,7 @@ public class DistrictsController {
     }
 
     @GetMapping("/get-all")
-    public DataResult<List<GetAllDistrictResponse>> getAll() {
-        return this.districtService.getAll();
+    public ResponseEntity<DataResult<List<GetAllDistrictResponse>>> getAll() {
+        return ResponseEntity.ok(this.districtService.getAll());
     }
 }
