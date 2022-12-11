@@ -24,12 +24,12 @@ public class BasketItemsController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody AddBasketItemRequest addBasketItemRequest) {
+    public ResponseEntity<DataResult<AddBasketItemResponse>> add(@RequestBody AddBasketItemRequest addBasketItemRequest) {
         return new ResponseEntity<>(basketItemService.add(addBasketItemRequest), HttpStatus.CREATED);
     }
 
     @GetMapping("/get-all")
-    public DataResult<List<GetAllBasketItemResponse>> getAll() {
-        return basketItemService.getAll();
+    public ResponseEntity<DataResult<List<GetAllBasketItemResponse>>> getAll() {
+        return ResponseEntity.ok(basketItemService.getAll());
     }
 }

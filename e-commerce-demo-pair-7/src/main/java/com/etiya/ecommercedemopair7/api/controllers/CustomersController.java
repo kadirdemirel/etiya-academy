@@ -7,6 +7,7 @@ import com.etiya.ecommercedemopair7.business.response.customers.GetAllCustomerRe
 import com.etiya.ecommercedemopair7.business.response.customers.GetCustomerResponse;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,12 +27,12 @@ public class CustomersController {
     }
 
     @GetMapping
-    public DataResult<List<GetAllCustomerResponse>> getAll() {
-        return customerService.getAll();
+    public ResponseEntity<DataResult<List<GetAllCustomerResponse>>> getAll() {
+        return ResponseEntity.ok(customerService.getAll());
     }
 
     @GetMapping("/{id}")
-    public DataResult<GetCustomerResponse> getById(@PathVariable int id) {
-        return customerService.getById(id);
+    public ResponseEntity<DataResult<GetCustomerResponse>> getById(@PathVariable int id) {
+        return ResponseEntity.ok(customerService.getById(id));
     }
 }

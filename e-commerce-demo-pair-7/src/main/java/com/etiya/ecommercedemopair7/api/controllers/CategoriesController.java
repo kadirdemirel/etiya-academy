@@ -26,28 +26,28 @@ public class CategoriesController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/getall")
-    public DataResult<List<GetAllCategoryResponse>> getAll() {
-        return this.categoryService.getAll();
+    @GetMapping("/get-all")
+    public ResponseEntity<DataResult<List<GetAllCategoryResponse>>> getAll() {
+        return ResponseEntity.ok(this.categoryService.getAll());
     }
 
     @GetMapping("/geybyid")
-    public DataResult<GetCategoryResponse> getById(@RequestParam int categoryId) {
-        return this.categoryService.getById(categoryId);
+    public ResponseEntity<DataResult<GetCategoryResponse>> getById(@RequestParam int categoryId) {
+        return ResponseEntity.ok(this.categoryService.getById(categoryId));
     }
 
     @GetMapping("get-by-name")
-    public DataResult<Category> getByName(@RequestParam("name") String name) {
-        return categoryService.getByName(name);
+    public ResponseEntity<DataResult<Category>> getByName(@RequestParam("name") String name) {
+        return ResponseEntity.ok(this.categoryService.getByName(name));
     }
 
     @GetMapping("custom-get-by-name")
-    public DataResult<Category> customGetByName(@RequestParam("name") String name) {
-        return categoryService.customGetByName(name);
+    public ResponseEntity<DataResult<Category>> customGetByName(@RequestParam("name") String name) {
+        return ResponseEntity.ok(this.categoryService.customGetByName(name));
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody AddCategoryRequest addCategoryRequest) {
+    public ResponseEntity<DataResult<AddCategoryResponse>> add(@RequestBody AddCategoryRequest addCategoryRequest) {
         return new ResponseEntity<>(categoryService.add(addCategoryRequest), HttpStatus.CREATED);
     }
 

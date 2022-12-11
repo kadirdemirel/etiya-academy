@@ -5,6 +5,7 @@ import com.etiya.ecommercedemopair7.business.constants.Paths;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.entities.dtos.ProductDetailDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ public class ProductDetailsController {
     }
 
     @GetMapping("get-all-dto")
-    public DataResult<List<ProductDetailDto>> getProductDetail() {
-        return productDetailService.getProductDetail();
+    public ResponseEntity<DataResult<List<ProductDetailDto>>> getProductDetail() {
+        return ResponseEntity.ok(productDetailService.getProductDetail());
     }
 }

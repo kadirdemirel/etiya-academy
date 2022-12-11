@@ -3,6 +3,7 @@ package com.etiya.ecommercedemopair7.api.controllers;
 import com.etiya.ecommercedemopair7.business.abstracts.ISellerService;
 import com.etiya.ecommercedemopair7.business.constants.Paths;
 import com.etiya.ecommercedemopair7.business.request.sellers.AddSellerRequest;
+import com.etiya.ecommercedemopair7.business.response.sellers.AddSellerResponse;
 import com.etiya.ecommercedemopair7.business.response.sellers.GetSellerResponse;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,12 @@ public class SellersController {
     }
 
     @GetMapping("/{id}")
-    public DataResult<GetSellerResponse> getById(@PathVariable int id){
-        return sellerService.getById(id);
+    public ResponseEntity<DataResult<GetSellerResponse>> getById(@PathVariable int id) {
+        return ResponseEntity.ok(sellerService.getById(id));
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody AddSellerRequest addSellerRequest) {
+    public ResponseEntity<DataResult<AddSellerResponse>> add(@RequestBody AddSellerRequest addSellerRequest) {
         return new ResponseEntity<>(sellerService.add(addSellerRequest), HttpStatus.CREATED);
     }
 

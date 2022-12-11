@@ -28,28 +28,28 @@ public class ProductCategoriesController {
     }
 
     @GetMapping("/{categoryId}")
-    public DataResult<ProductCategory> getByCategoryId(@PathVariable int categoryId) {
-        return productCategoryService.getByCategoryId(categoryId);
+    public ResponseEntity<DataResult<ProductCategory>> getByCategoryId(@PathVariable int categoryId) {
+        return ResponseEntity.ok(productCategoryService.getByCategoryId(categoryId));
 
     }
 
     @GetMapping("/get-by-product")
-    public DataResult<ProductCategory> getByProductId(@RequestParam("id") int id) {
-        return productCategoryService.getByProductId(id);
+    public ResponseEntity<DataResult<ProductCategory>> getByProductId(@RequestParam("id") int id) {
+        return ResponseEntity.ok(productCategoryService.getByProductId(id));
     }
 
     @GetMapping("/get-all")
-    public DataResult<List<GetAllProductCategoryResponse>> getAll() {
-        return productCategoryService.getAll();
+    public ResponseEntity<DataResult<List<GetAllProductCategoryResponse>>> getAll() {
+        return ResponseEntity.ok(productCategoryService.getAll());
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody @Valid AddProductCategoryRequest addProductCategoryRequest) {
+    public ResponseEntity<DataResult<AddProductCategoryResponse>> add(@RequestBody @Valid AddProductCategoryRequest addProductCategoryRequest) {
         return new ResponseEntity<>(productCategoryService.add(addProductCategoryRequest), HttpStatus.CREATED);
     }
 
     @GetMapping("/get-all-dto")
-    public DataResult<List<ProductCategoryDto>> getProductCategoryDto() {
-        return productCategoryService.getProductCategoryDto();
+    public ResponseEntity<DataResult<List<ProductCategoryDto>>> getProductCategoryDto() {
+        return ResponseEntity.ok(productCategoryService.getProductCategoryDto());
     }
 }
