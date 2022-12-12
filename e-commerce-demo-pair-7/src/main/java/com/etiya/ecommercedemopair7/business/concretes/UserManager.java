@@ -4,6 +4,7 @@ import com.etiya.ecommercedemopair7.business.abstracts.IUserService;
 import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.business.response.users.GetAllUserResponse;
 import com.etiya.ecommercedemopair7.business.response.users.GetUserResponse;
+import com.etiya.ecommercedemopair7.core.utilities.exceptions.BusinessException;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
@@ -52,7 +53,7 @@ public class UserManager implements IUserService {
         try {
             currentUser = this.userRepository.findById(id).orElseThrow();
         } catch (Exception e) {
-            throw new RuntimeException(Messages.User.userNotFound);
+            throw new BusinessException(Messages.User.userNotFound);
         }
         return currentUser;
     }

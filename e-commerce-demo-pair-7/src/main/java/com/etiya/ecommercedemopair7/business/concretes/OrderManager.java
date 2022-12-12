@@ -8,6 +8,7 @@ import com.etiya.ecommercedemopair7.business.request.orders.AddOrderRequest;
 import com.etiya.ecommercedemopair7.business.response.orders.AddOrderResponse;
 import com.etiya.ecommercedemopair7.business.response.orders.GetAllOrderResponse;
 import com.etiya.ecommercedemopair7.business.response.orders.GetOrderResponse;
+import com.etiya.ecommercedemopair7.core.utilities.exceptions.BusinessException;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
@@ -102,7 +103,7 @@ public class OrderManager implements IOrderService {
         try {
             currentOrder = this.orderRepository.findById(id).get();
         } catch (Exception ex) {
-            throw new RuntimeException(Messages.Order.orderNotFound);
+            throw new BusinessException(Messages.Order.orderNotFound);
         }
         return currentOrder;
     }

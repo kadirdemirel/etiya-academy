@@ -8,6 +8,7 @@ import com.etiya.ecommercedemopair7.business.request.addresses.AddAddressRequest
 import com.etiya.ecommercedemopair7.business.response.addresses.AddAddressResponse;
 import com.etiya.ecommercedemopair7.business.response.addresses.GetAddressResponse;
 import com.etiya.ecommercedemopair7.business.response.addresses.GetAllAddressResponse;
+import com.etiya.ecommercedemopair7.core.utilities.exceptions.BusinessException;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
@@ -93,7 +94,7 @@ public class AddressManager implements IAddressService {
         try {
             currentAddress = this.addressRepository.findById(addressId).get();
         } catch (Exception e) {
-            throw new RuntimeException(Messages.Address.addressNotFound);
+            throw new BusinessException(Messages.Address.addressNotFound);
         }
         return currentAddress;
     }

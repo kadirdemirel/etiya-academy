@@ -4,6 +4,7 @@ import com.etiya.ecommercedemopair7.business.abstracts.ICityService;
 import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.business.response.cities.GetAllCityResponse;
 import com.etiya.ecommercedemopair7.business.response.cities.GetCityResponse;
+import com.etiya.ecommercedemopair7.core.utilities.exceptions.BusinessException;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
@@ -52,7 +53,7 @@ public class CityManager implements ICityService {
         try {
             currentCity = this.cityRepository.findById(id).get();
         } catch (Exception e) {
-            throw new RuntimeException(Messages.City.cityNotFound);
+            throw new BusinessException(Messages.City.cityNotFound);
         }
         return currentCity;
     }

@@ -6,6 +6,7 @@ import com.etiya.ecommercedemopair7.business.request.categories.AddCategoryReque
 import com.etiya.ecommercedemopair7.business.response.categories.AddCategoryResponse;
 import com.etiya.ecommercedemopair7.business.response.categories.GetAllCategoryResponse;
 import com.etiya.ecommercedemopair7.business.response.categories.GetCategoryResponse;
+import com.etiya.ecommercedemopair7.core.utilities.exceptions.BusinessException;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
@@ -72,7 +73,7 @@ public class CategoryManager implements ICategoryService {
     private void categoryCanNotExistWithSameName(String name) {
         boolean isExists = categoryRepository.existsCategoryByName(name);
         if (isExists)
-            throw new RuntimeException(Messages.Category.categoryExistsWithSameName);
+            throw new BusinessException(Messages.Category.categoryExistsWithSameName);
     }
 
     private Category existsByCategoryId(int id) {
@@ -80,7 +81,7 @@ public class CategoryManager implements ICategoryService {
         try {
             currentCategory = this.categoryRepository.findById(id).get();
         } catch (Exception e) {
-            throw new RuntimeException(Messages.Category.categoryNotFound);
+            throw new BusinessException(Messages.Category.categoryNotFound);
         }
         return currentCategory;
     }

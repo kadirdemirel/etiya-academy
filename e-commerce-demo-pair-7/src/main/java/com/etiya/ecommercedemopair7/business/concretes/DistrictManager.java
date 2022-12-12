@@ -5,6 +5,7 @@ import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.business.response.customers.GetAllCustomerResponse;
 import com.etiya.ecommercedemopair7.business.response.districts.GetAllDistrictResponse;
 import com.etiya.ecommercedemopair7.business.response.districts.GetDistrictResponse;
+import com.etiya.ecommercedemopair7.core.utilities.exceptions.BusinessException;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
@@ -49,7 +50,7 @@ public class DistrictManager implements IDistrictService {
         try {
             currentDistrict = this.districtRepository.findById(id).get();
         } catch (Exception e) {
-            throw new RuntimeException(Messages.District.districtNotFound);
+            throw new BusinessException(Messages.District.districtNotFound);
         }
         return currentDistrict;
     }

@@ -6,6 +6,7 @@ import com.etiya.ecommercedemopair7.business.request.products.AddProductRequest;
 import com.etiya.ecommercedemopair7.business.response.products.AddProductResponse;
 import com.etiya.ecommercedemopair7.business.response.products.GetAllProductResponse;
 import com.etiya.ecommercedemopair7.business.response.products.GetProductResponse;
+import com.etiya.ecommercedemopair7.core.utilities.exceptions.BusinessException;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
@@ -75,7 +76,7 @@ public class ProductManager implements IProductService {
         try {
             currentProduct = this.productRepository.findById(productId);
         } catch (Exception e) {
-            throw new RuntimeException(Messages.Product.productNotFound);
+            throw new BusinessException(Messages.Product.productNotFound);
         }
         return currentProduct;
     }
