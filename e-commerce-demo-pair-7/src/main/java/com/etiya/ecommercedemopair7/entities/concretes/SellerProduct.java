@@ -3,6 +3,7 @@ package com.etiya.ecommercedemopair7.entities.concretes;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -35,5 +36,11 @@ public class SellerProduct {
 
     @Column(name = "unit_price")
     private double unitPrice;
+
+    @OneToMany(mappedBy = "sellerProduct")
+    private List<BasketItem> basketItems;
+
+    @OneToMany(mappedBy = "sellerProduct")
+    private List<OrderItem> orderItems;
 
 }

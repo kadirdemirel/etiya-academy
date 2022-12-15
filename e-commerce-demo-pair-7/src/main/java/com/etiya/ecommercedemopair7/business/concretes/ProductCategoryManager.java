@@ -9,6 +9,7 @@ import com.etiya.ecommercedemopair7.business.response.orders.GetAllOrderResponse
 import com.etiya.ecommercedemopair7.business.response.productCategories.AddProductCategoryResponse;
 import com.etiya.ecommercedemopair7.business.response.productCategories.GetAllProductCategoryResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
+import com.etiya.ecommercedemopair7.core.utilities.messages.IMessageSourceService;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.Category;
@@ -30,9 +31,12 @@ public class ProductCategoryManager implements IProductCategoryService {
     private ICategoryService categoryService;
     private IProductService productService;
     private IModelMapperService modelMapperService;
+    private IMessageSourceService messageSourceService;
 
     @Autowired
-    public ProductCategoryManager(IProductCategoryRepository productCategoryRepository, ICategoryService categoryService, IProductService productService, IModelMapperService modelMapperService) {
+    public ProductCategoryManager(IProductCategoryRepository productCategoryRepository,
+                                  ICategoryService categoryService, IProductService productService,
+                                  IModelMapperService modelMapperService) {
         this.productCategoryRepository = productCategoryRepository;
         this.productService = productService;
         this.categoryService = categoryService;
@@ -41,38 +45,51 @@ public class ProductCategoryManager implements IProductCategoryService {
 
     @Override
     public DataResult<ProductCategory> getByCategoryId(int categoryId) {
-        return new SuccessDataResult<>(this.productCategoryRepository.findByCategoryId(categoryId), Messages.ProductCategory.productCategoryReceived);
+        return new SuccessDataResult<>(this.productCategoryRepository
+                .findByCategoryId(categoryId),
+                messageSourceService.getMessage(Messages.ProductCategory.productCategoryReceived));
     }
 
     @Override
     public DataResult<ProductCategory> getByProductId(int productId) {
-        return new SuccessDataResult<>(this.productCategoryRepository.findByCategoryId(productId), Messages.ProductCategory.productCategoryReceived);
+        return new SuccessDataResult<>(this.productCategoryRepository.
+                findByCategoryId(productId),
+                messageSourceService.getMessage(Messages.ProductCategory.productCategoryReceived));
     }
 
     @Override
     public DataResult<AddProductCategoryResponse> add(AddProductCategoryRequest addProductCategoryRequest) {
         existsByCategory(addProductCategoryRequest);
         existsByProduct(addProductCategoryRequest);
-        ProductCategory productCategory = modelMapperService.forRequest().map(addProductCategoryRequest, ProductCategory.class);
+        ProductCategory productCategory = modelMapperService.forRequest()
+                .map(addProductCategoryRequest, ProductCategory.class);
 
         ProductCategory savedProductCategory = productCategoryRepository.save(productCategory);
-        AddProductCategoryResponse response = modelMapperService.forResponse().map(savedProductCategory, AddProductCategoryResponse.class);
-        return new SuccessDataResult<>(response, Messages.ProductCategory.productCategoryAdded);
+        AddProductCategoryResponse response = modelMapperService.forResponse()
+                .map(savedProductCategory, AddProductCategoryResponse.class);
+        return new SuccessDataResult<>(response,
+                messageSourceService.getMessage(Messages.ProductCategory.productCategoryAdded));
     }
 
     @Override
     public DataResult<List<GetAllProductCategoryResponse>> getAll() {
         List<ProductCategory> productCategories = this.productCategoryRepository.findAll();
-        List<GetAllProductCategoryResponse> response = productCategories.stream().map(productCategory -> this.modelMapperService
-                .forResponse().map(productCategory, GetAllProductCategoryResponse.class)).collect(Collectors.toList());
-        return new SuccessDataResult<>(response, Messages.ProductCategory.productCategoriesListed);
+        List<GetAllProductCategoryResponse> response = productCategories.stream()
+                .map(productCategory -> this.modelMapperService
+                        .forResponse().map(productCategory, GetAllProductCategoryResponse.class))
+                .collect(Collectors.toList());
+        return new SuccessDataResult<>(response,
+                messageSourceService.getMessage(Messages.ProductCategory.productCategoriesListed));
     }
 
     @Override
     public DataResult<List<ProductCategoryDto>> getProductCategoryDto() {
         List<ProductCategory> productCategories = productCategoryRepository.findAll();
-        List<ProductCategoryDto> response = productCategories.stream().map(productCategory -> modelMapperService.forResponse().map(productCategory, ProductCategoryDto.class)).collect(Collectors.toList());
-        return new SuccessDataResult<>(response, Messages.ProductCategory.productCategoriesListed);
+        List<ProductCategoryDto> response = productCategories.stream()
+                .map(productCategory -> modelMapperService.forResponse()
+                        .map(productCategory, ProductCategoryDto.class)).collect(Collectors.toList());
+        return new SuccessDataResult<>(response,
+                messageSourceService.getMessage(Messages.ProductCategory.productCategoriesListed));
     }
 
     private Product existsByProduct(AddProductCategoryRequest addProductCategoryRequest) {

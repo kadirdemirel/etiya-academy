@@ -4,16 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import javax.validation.constraints.Min;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddOrderRequest {
-    private String orderNumber;
+    @Min(value = 1, message = "Sepet tutarı 0 TL'den düşük olamaz !")
     private double totalPrice;
-    private LocalDate orderDate;
+    @Min(1)
     private int deliveryOptionId;
+    @Min(1)
     private int orderAddressId;
+    @Min(1)
     private int invoiceAddressId;
+    @Min(1)
+    private int paymentId;
+
 }

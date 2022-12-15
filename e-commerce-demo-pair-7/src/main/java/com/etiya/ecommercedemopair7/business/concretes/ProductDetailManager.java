@@ -1,6 +1,7 @@
 package com.etiya.ecommercedemopair7.business.concretes;
 
 import com.etiya.ecommercedemopair7.business.abstracts.IProductDetailService;
+import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
@@ -27,7 +28,8 @@ public class ProductDetailManager implements IProductDetailService {
     @Override
     public DataResult<List<ProductDetailDto>> getProductDetail() {
         List<ProductDetail> productDetails = productDetailRepository.findAll();
-        List<ProductDetailDto> response = productDetails.stream().map(productDetail -> modelMapperService.forResponse().map(productDetail, ProductDetailDto.class)).collect(Collectors.toList());
+        List<ProductDetailDto> response = productDetails.stream().map(productDetail -> modelMapperService.forResponse()
+                .map(productDetail, ProductDetailDto.class)).collect(Collectors.toList());
         return new SuccessDataResult<>(response);
     }
 }

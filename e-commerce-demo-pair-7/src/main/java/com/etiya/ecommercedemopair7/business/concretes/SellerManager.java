@@ -7,6 +7,7 @@ import com.etiya.ecommercedemopair7.business.response.sellers.AddSellerResponse;
 import com.etiya.ecommercedemopair7.business.response.sellers.GetSellerResponse;
 import com.etiya.ecommercedemopair7.core.utilities.exceptions.BusinessException;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
+import com.etiya.ecommercedemopair7.core.utilities.messages.IMessageSourceService;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.Seller;
@@ -19,6 +20,7 @@ public class SellerManager implements ISellerService {
 
     private ISellerRepository sellerRepository;
     private IModelMapperService modelMapperService;
+    private IMessageSourceService messageSourceService;
 
     @Autowired
     public SellerManager(ISellerRepository sellerRepository, IModelMapperService modelMapperService) {
@@ -32,7 +34,7 @@ public class SellerManager implements ISellerService {
         Seller savedSeller = sellerRepository.save(seller);
 
         AddSellerResponse response = modelMapperService.forResponse().map(savedSeller, AddSellerResponse.class);
-        return new SuccessDataResult<>(response, Messages.Seller.sellerAdded);
+        return new SuccessDataResult<>(response, messageSourceService.getMessage(Messages.Seller.sellerAdded));
 
     }
 
@@ -40,7 +42,7 @@ public class SellerManager implements ISellerService {
     public DataResult<GetSellerResponse> getById(int sellerId) {
         Seller seller = existsBySellerId(sellerId);
         GetSellerResponse response = modelMapperService.forResponse().map(seller, GetSellerResponse.class);
-        return new SuccessDataResult<>(response, Messages.Seller.sellerReceived);
+        return new SuccessDataResult<>(response, messageSourceService.getMessage(Messages.Seller.sellerReceived));
     }
 
     @Override
@@ -53,7 +55,7 @@ public class SellerManager implements ISellerService {
         try {
             currentSeller = this.sellerRepository.findById(sellerId).get();
         } catch (Exception e) {
-            throw new BusinessException(Messages.Seller.sellerNotFound);
+            throw new BusinessException(messageSourceService.getMessage(Messages.Seller.sellerNotFound));
         }
         return currentSeller;
     }

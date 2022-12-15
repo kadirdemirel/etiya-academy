@@ -7,6 +7,7 @@ import com.etiya.ecommercedemopair7.business.response.productChars.AddProductCha
 import com.etiya.ecommercedemopair7.business.response.productChars.GetProductCharResponse;
 import com.etiya.ecommercedemopair7.core.utilities.exceptions.BusinessException;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
+import com.etiya.ecommercedemopair7.core.utilities.messages.IMessageSourceService;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.ProductChar;
@@ -18,18 +19,23 @@ import org.springframework.stereotype.Service;
 public class ProductCharManager implements IProductCharService {
     private IProductCharRepository productCharRepository;
     private IModelMapperService modelMapperService;
+    private IMessageSourceService messageSourceService;
 
     @Autowired
-    public ProductCharManager(IProductCharRepository productcharRepository, IModelMapperService modelMapperService) {
+    public ProductCharManager(IProductCharRepository productcharRepository, IModelMapperService modelMapperService,
+                              IMessageSourceService messageSourceService) {
         this.productCharRepository = productcharRepository;
         this.modelMapperService = modelMapperService;
+        this.messageSourceService = messageSourceService;
     }
 
     @Override
     public DataResult<GetProductCharResponse> getById(int productCharId) {
         ProductChar productChar = checkIfProductCharExistsById(productCharId);
-        GetProductCharResponse response = modelMapperService.forResponse().map(productChar, GetProductCharResponse.class);
-        return new SuccessDataResult<>(response,Messages.ProductChar.productCharReceived);
+        GetProductCharResponse response = modelMapperService
+                .forResponse().map(productChar, GetProductCharResponse.class);
+        return new SuccessDataResult<>(response,
+                messageSourceService.getMessage(Messages.ProductChar.productCharReceived));
     }
 
     @Override
@@ -42,8 +48,9 @@ public class ProductCharManager implements IProductCharService {
     public DataResult<AddProductCharResponse> add(AddProductCharRequest addProductCharRequest) {
         ProductChar productChar = modelMapperService.forRequest().map(addProductCharRequest, ProductChar.class);
         ProductChar savedProductChar = productCharRepository.save((productChar));
-        AddProductCharResponse response = modelMapperService.forResponse().map(savedProductChar, AddProductCharResponse.class);
-        return new SuccessDataResult<>(response,Messages.ProductChar.productCharAdded);
+        AddProductCharResponse response = modelMapperService.forResponse()
+                .map(savedProductChar, AddProductCharResponse.class);
+        return new SuccessDataResult<>(response, messageSourceService.getMessage(Messages.ProductChar.productCharAdded));
     }
 
     private ProductChar checkIfProductCharExistsById(int productCharId) {
@@ -51,7 +58,7 @@ public class ProductCharManager implements IProductCharService {
         try {
             currentProductChar = productCharRepository.findById(productCharId).get();
         } catch (Exception e) {
-            throw new BusinessException(Messages.ProductChar.productCharNotFound);
+            throw new BusinessException(messageSourceService.getMessage(Messages.ProductChar.productCharNotFound));
         }
         return currentProductChar;
     }

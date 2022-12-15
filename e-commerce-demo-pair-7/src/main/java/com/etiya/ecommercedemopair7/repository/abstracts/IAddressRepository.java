@@ -13,4 +13,6 @@ public interface IAddressRepository extends JpaRepository<Address, Integer> {
             "inner join d.town t inner join t.city ci inner join ci.country co inner join a.user u")
     List<AddressDto> getAddressDto();
 
+    Address findByUserId(int userId);
+
 }

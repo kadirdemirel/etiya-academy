@@ -17,4 +17,5 @@ public class AddOrderResponse {
     private int deliveryOptionId;
     private int orderAddressId;
     private int invoiceAddressId;
+    private int paymentId;
 }

@@ -28,6 +28,6 @@ public class BasketItem {
     private Basket basket;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @JoinColumn(name = "seller_product_id")
+    private SellerProduct sellerProduct;
 }

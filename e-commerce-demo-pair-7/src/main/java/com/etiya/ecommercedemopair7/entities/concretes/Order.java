@@ -1,19 +1,18 @@
 package com.etiya.ecommercedemopair7.entities.concretes;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "orders")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Order {
 
     @Id
@@ -21,14 +20,9 @@ public class Order {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "order_number")
-    private String orderNumber;
-
-    @Column(name = "total_price")
-    private double totalPrice;
-
-    @Column(name = "order_date")
-    private LocalDate orderDate;
+    @OneToOne
+    @JoinColumn(name = "payment_id", referencedColumnName = "id")
+    private Payment payment;
 
     @ManyToOne
     @JoinColumn(name = "delivery_options_id")
@@ -42,6 +36,21 @@ public class Order {
     @JoinColumn(name = "invoice_address_id")
     private Address invoiceAddress;
 
+    @Column(name = "order_number")
+    private String orderNumber;
+
+    @Column(name = "total_price")
+    private double totalPrice;
+
+    @Column(name = "order_date")
+    private LocalDate orderDate;
+
+
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems;
+
+    @OneToOne(mappedBy = "order",cascade = CascadeType.ALL)
+    private Invoice invoice;
+
+
 }

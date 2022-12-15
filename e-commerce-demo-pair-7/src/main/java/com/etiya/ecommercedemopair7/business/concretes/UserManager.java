@@ -6,6 +6,7 @@ import com.etiya.ecommercedemopair7.business.response.users.GetAllUserResponse;
 import com.etiya.ecommercedemopair7.business.response.users.GetUserResponse;
 import com.etiya.ecommercedemopair7.core.utilities.exceptions.BusinessException;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
+import com.etiya.ecommercedemopair7.core.utilities.messages.IMessageSourceService;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.User;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class UserManager implements IUserService {
     private IUserRepository userRepository;
     private IModelMapperService modelMapperService;
+    private IMessageSourceService messageSourceService;
 
     @Autowired
     UserManager(IUserRepository userRepository, IModelMapperService modelMapperService) {
@@ -33,14 +35,14 @@ public class UserManager implements IUserService {
         List<GetAllUserResponse> response = users.stream()
                 .map(user -> modelMapperService.forResponse().map(user, GetAllUserResponse.class))
                 .collect(Collectors.toList());
-        return new SuccessDataResult<>(response, Messages.User.usersListed);
+        return new SuccessDataResult<>(response, messageSourceService.getMessage(Messages.User.usersListed));
     }
 
     @Override
     public DataResult<GetUserResponse> getById(int id) {
         User user = checkIfUserExistsById(id);
         GetUserResponse response = modelMapperService.forResponse().map(user, GetUserResponse.class);
-        return new SuccessDataResult<>(response, Messages.User.userReceived);
+        return new SuccessDataResult<>(response, messageSourceService.getMessage(Messages.User.userReceived));
     }
 
     @Override
@@ -53,7 +55,7 @@ public class UserManager implements IUserService {
         try {
             currentUser = this.userRepository.findById(id).orElseThrow();
         } catch (Exception e) {
-            throw new BusinessException(Messages.User.userNotFound);
+            throw new BusinessException(messageSourceService.getMessage(Messages.User.userNotFound));
         }
         return currentUser;
     }

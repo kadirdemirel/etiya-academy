@@ -8,52 +8,56 @@ import com.etiya.ecommercedemopair7.business.response.categories.GetAllCategoryR
 import com.etiya.ecommercedemopair7.business.response.categories.GetCategoryResponse;
 import com.etiya.ecommercedemopair7.core.utilities.exceptions.BusinessException;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
+import com.etiya.ecommercedemopair7.core.utilities.messages.IMessageSourceService;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.Category;
 import com.etiya.ecommercedemopair7.repository.abstracts.ICategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
 public class CategoryManager implements ICategoryService {
     private ICategoryRepository categoryRepository;
     private IModelMapperService modelMapperService;
+    private IMessageSourceService messageSourceService;
 
     @Autowired
-    CategoryManager(ICategoryRepository categoryRepository, IModelMapperService modelMapperService) {
+    CategoryManager(ICategoryRepository categoryRepository, IModelMapperService modelMapperService, IMessageSourceService messageSourceService) {
         this.categoryRepository = categoryRepository;
         this.modelMapperService = modelMapperService;
+        this.messageSourceService = messageSourceService;
     }
 
 
     @Override
     public DataResult<List<GetAllCategoryResponse>> getAll() {
         List<Category> categories = this.categoryRepository.findAll();
-        List<GetAllCategoryResponse> response = categories.stream()
-                .map(category -> this.modelMapperService.forResponse().map(category, GetAllCategoryResponse.class))
-                .collect(Collectors.toList());
-        return new SuccessDataResult<>(response, Messages.Category.categoriesListed);
+        List<GetAllCategoryResponse> response = categories.stream().map(category -> this.modelMapperService.forResponse().map(category, GetAllCategoryResponse.class)).collect(Collectors.toList());
+        return new SuccessDataResult<>(response, messageSourceService.getMessage(Messages.Category.categoriesListed));
     }
 
     @Override
     public DataResult<GetCategoryResponse> getById(int categoryId) {
         Category category = existsByCategoryId(categoryId);
         GetCategoryResponse response = modelMapperService.forResponse().map(category, GetCategoryResponse.class);
-        return new SuccessDataResult<>(response, Messages.Category.categoryReceived);
+        return new SuccessDataResult<>(response, messageSourceService.getMessage(Messages.Category.categoryReceived));
     }
 
     @Override
     public DataResult<Category> getByName(String name) {
-        return new SuccessDataResult<>(categoryRepository.findByName(name), Messages.Category.categoryReceived);
+        return new SuccessDataResult<>(categoryRepository.findByName(name), messageSourceService.getMessage(Messages.Category.categoryReceived));
     }
 
     @Override
     public DataResult<Category> customGetByName(String name) {
-        return new SuccessDataResult<>(categoryRepository.customFindByName(name), Messages.Category.categoryReceived);
+        return new SuccessDataResult<>(categoryRepository.customFindByName(name), messageSourceService.getMessage(Messages.Category.categoryReceived));
     }
 
     @Override
@@ -62,7 +66,7 @@ public class CategoryManager implements ICategoryService {
         categoryCanNotExistWithSameName(addCategoryRequest.getName());
         Category savedCategory = categoryRepository.save(category);
         AddCategoryResponse response = modelMapperService.forResponse().map(savedCategory, AddCategoryResponse.class);
-        return new SuccessDataResult<>(response, Messages.Category.categoryAdded);
+        return new SuccessDataResult<>(response, messageSourceService.getMessage(Messages.Category.categoryAdded));
     }
 
     @Override
@@ -73,7 +77,7 @@ public class CategoryManager implements ICategoryService {
     private void categoryCanNotExistWithSameName(String name) {
         boolean isExists = categoryRepository.existsCategoryByName(name);
         if (isExists)
-            throw new BusinessException(Messages.Category.categoryExistsWithSameName);
+            throw new BusinessException(messageSourceService.getMessage(Messages.Category.categoryExistsWithSameName));
     }
 
     private Category existsByCategoryId(int id) {
@@ -81,7 +85,7 @@ public class CategoryManager implements ICategoryService {
         try {
             currentCategory = this.categoryRepository.findById(id).get();
         } catch (Exception e) {
-            throw new BusinessException(Messages.Category.categoryNotFound);
+            throw new BusinessException(messageSourceService.getMessage(Messages.Category.categoryNotFound));
         }
         return currentCategory;
     }

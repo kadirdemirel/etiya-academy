@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddBasketResponse {
+public class UpdateBasketResponse {
+    private int id;
     int customerId;
     double totalPrice;
     double shippingPrice;

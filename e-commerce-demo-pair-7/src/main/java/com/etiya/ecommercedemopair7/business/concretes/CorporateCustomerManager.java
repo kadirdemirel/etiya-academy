@@ -6,6 +6,7 @@ import com.etiya.ecommercedemopair7.business.request.corporateCustomers.AddCorpo
 import com.etiya.ecommercedemopair7.business.response.corporateCustomers.AddCorporateCustomerResponse;
 import com.etiya.ecommercedemopair7.business.response.corporateCustomers.GetAllCorporateCustomerResponse;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
+import com.etiya.ecommercedemopair7.core.utilities.messages.IMessageSourceService;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.CorporateCustomer;
@@ -21,26 +22,36 @@ public class CorporateCustomerManager implements ICorporateCustomerService {
 
     private ICorporateCustomerRepository corporateCustomerRepository;
     private IModelMapperService modelMapperService;
+    private IMessageSourceService messageSourceService;
 
     @Autowired
-    public CorporateCustomerManager(ICorporateCustomerRepository corporateCustomerRepository, IModelMapperService modelMapperService) {
+    public CorporateCustomerManager(ICorporateCustomerRepository corporateCustomerRepository,
+                                    IModelMapperService modelMapperService,
+                                    IMessageSourceService messageSourceService) {
         this.corporateCustomerRepository = corporateCustomerRepository;
         this.modelMapperService = modelMapperService;
+        this.messageSourceService = messageSourceService;
     }
 
     @Override
     public DataResult<AddCorporateCustomerResponse> add(AddCorporateCustomerRequest addCorporateCustomerRequest) {
-        CorporateCustomer corporateCustomer = modelMapperService.forRequest().map(addCorporateCustomerRequest, CorporateCustomer.class);
+        CorporateCustomer corporateCustomer = modelMapperService.forRequest()
+                .map(addCorporateCustomerRequest, CorporateCustomer.class);
         CorporateCustomer savedCorporateCustomer = corporateCustomerRepository.save(corporateCustomer);
-        AddCorporateCustomerResponse response = modelMapperService.forResponse().map(savedCorporateCustomer, AddCorporateCustomerResponse.class);
-        return new SuccessDataResult<>(response, Messages.CorporateCustomer.corporateCustomerAdded);
+        AddCorporateCustomerResponse response = modelMapperService.forResponse()
+                .map(savedCorporateCustomer, AddCorporateCustomerResponse.class);
+        return new SuccessDataResult<>(response, messageSourceService
+                .getMessage(Messages.CorporateCustomer.corporateCustomerAdded));
     }
 
     @Override
     public DataResult<List<GetAllCorporateCustomerResponse>> getAll() {
         List<CorporateCustomer> corporateCustomers = this.corporateCustomerRepository.findAll();
-        List<GetAllCorporateCustomerResponse> response = corporateCustomers.stream().map(corporateCustomer -> this.modelMapperService
-                .forResponse().map(corporateCustomer, GetAllCorporateCustomerResponse.class)).collect(Collectors.toList());
-        return new SuccessDataResult<>(response, Messages.CorporateCustomer.corporateCustomersListed);
+        List<GetAllCorporateCustomerResponse> response = corporateCustomers.stream()
+                .map(corporateCustomer -> this.modelMapperService
+                        .forResponse().map(corporateCustomer, GetAllCorporateCustomerResponse.class))
+                .collect(Collectors.toList());
+        return new SuccessDataResult<>(response,
+                messageSourceService.getMessage(Messages.CorporateCustomer.corporateCustomersListed));
     }
 }

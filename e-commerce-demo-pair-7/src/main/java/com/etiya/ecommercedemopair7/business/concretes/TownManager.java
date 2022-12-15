@@ -5,6 +5,7 @@ import com.etiya.ecommercedemopair7.business.constants.Messages;
 import com.etiya.ecommercedemopair7.business.response.towns.GetTownResponse;
 import com.etiya.ecommercedemopair7.core.utilities.exceptions.BusinessException;
 import com.etiya.ecommercedemopair7.core.utilities.mapping.IModelMapperService;
+import com.etiya.ecommercedemopair7.core.utilities.messages.IMessageSourceService;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
 import com.etiya.ecommercedemopair7.core.utilities.results.SuccessDataResult;
 import com.etiya.ecommercedemopair7.entities.concretes.Town;
@@ -17,18 +18,21 @@ public class TownManager implements ITownService {
 
     private ITownRepository townRepository;
     private IModelMapperService modelMapperService;
+    private IMessageSourceService messageSourceService;
 
     @Autowired
-    public TownManager(ITownRepository townRepository, IModelMapperService modelMapperService) {
+    public TownManager(ITownRepository townRepository, IModelMapperService modelMapperService,
+                       IMessageSourceService messageSourceService) {
         this.townRepository = townRepository;
         this.modelMapperService = modelMapperService;
+        this.messageSourceService = messageSourceService;
     }
 
     @Override
     public DataResult<GetTownResponse> getById(int townId) {
         Town town = checkIfTownExistsById(townId);
         GetTownResponse response = modelMapperService.forResponse().map(town, GetTownResponse.class);
-        return new SuccessDataResult<>(response, Messages.Town.townReceived);
+        return new SuccessDataResult<>(response, messageSourceService.getMessage(Messages.Town.townReceived));
     }
 
     private Town checkIfTownExistsById(int id) {
@@ -36,7 +40,7 @@ public class TownManager implements ITownService {
         try {
             currentTown = this.townRepository.findById(id).orElseThrow();
         } catch (Exception e) {
-            throw new BusinessException(Messages.Town.townNotFound);
+            throw new BusinessException(messageSourceService.getMessage(Messages.Town.townNotFound));
         }
         return currentTown;
     }

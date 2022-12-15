@@ -3,140 +3,152 @@ package com.etiya.ecommercedemopair7.business.constants;
 public class Messages {
 
     public static class Address {
-        public static final String addressNotFound = "İlgili adres bulunamadı.";
-        public static final String addressesListed = "Adresler başarıyla listelendi.";
-        public static final String addressReceived = "Adres başarıyla gösterildi.";
-        public static final String addressAdded = "Adres başarıyla eklendi.";
+        public static final String addressNotFound = "addressNotFound";
+        public static final String addressesListed = "addressesListed";
+        public static final String addressReceived = "addressReceived";
+        public static final String addressAdded = "addressAdded";
     }
 
     public static class Basket {
-        public static final String basketNotFound = "İlgili sepet bulunamadı.";
-        public static final String basketsListed = "Sepetler başarıyla listelendi";
-        public static final String basketReceived = "Sepet başarıyla gösterildi";
-        public static final String basketAdded = "Sepet başarıyla eklendi";
+        public static final String basketNotFound = "basketNotFound";
+        public static final String basketsListed = "basketsListed";
+        public static final String basketReceived = "basketReceived";
+        public static final String basketAdded = "basketAdded";
     }
 
     public static class Category {
-        public static final String categoryExistsWithSameName = "Bu isimle bir kategori zaten mevcut!";
-        public static final String categoryNotFound = "İlgili kategori bulunamadı.";
-        public static final String categoriesListed = "Kategoriler başarıyla listelendi";
-        public static final String categoryReceived = "Kategori başarıyla gösterildi";
-        public static final String categoryAdded = "Kategori başarıyla eklendi";
+        public static final String categoryExistsWithSameName = "categoryExistsWithSameName";
+        public static final String categoryNotFound = "categoryNotFound";
+        public static final String categoriesListed = "categoriesListed";
+        public static final String categoryReceived = "categoryReceived";
+        public static final String categoryAdded = "categoryAdded";
     }
 
     public static class City {
-        public static final String cityNotFound = "İlgili şehir bulunamadı.";
-        public static final String citiesListed = "Şehirler başarıyla listelendi";
-        public static final String cityReceived = "Şehir başarıyla gösterildi";
-        public static final String cityAdded = "Şehir başarıyla eklendi";
+        public static final String cityNotFound = "cityNotFound";
+        public static final String citiesListed = "citiesListed";
+        public static final String cityReceived = "cityReceived";
     }
 
     public static class CorporateCustomer {
-        public static final String corporateCustomersListed = "Tüzel müşteriler başarıyla listelendi";
-        public static final String corporateCustomerAdded = "Tüzel müşteri başarıyla eklendi";
+        public static final String corporateCustomersListed = "corporateCustomersListed";
+        public static final String corporateCustomerAdded = "corporateCustomerAdded";
     }
 
     public static class Country {
-        public static final String countryNotFound = "İlgili ülke bulunamadı.";
-        public static final String countriesListed = "Ülkeler başarıyla listelendi";
-        public static final String countryReceived = "Ülke başarıyla gösterildi";
-        public static final String countryAdded = "Ülke başarıyla eklendi";
+        public static final String countryNotFound = "countryNotFound";
+        public static final String countriesListed = "countriesListed";
+        public static final String countryReceived = "countryReceived";
     }
 
     public static class Customer {
-        public static final String customerNotFound = "İlgili müşteri bulunamadı.";
-        public static final String customersListed = "Müşteriler başarıyla listelendi";
-        public static final String customerReceived = "Müşteri başarıyla gösterildi";
-        public static final String customerAdded = "Müşteri başarıyla eklendi";
+        public static final String customerNotFound = "customerNotFound";
+        public static final String customersListed = "customersListed";
+        public static final String customerReceived = "customerReceived";
     }
 
     public static class DeliveryOption {
-        public static final String deliveryOptionNotFound = "İlgili teslimat seçeneği bulunamadı.";
-        public static final String deliveryOptionsListed = "Teslimat seçenekleri başarıyla listelendi";
-        public static final String deliveryOptionReceived = "Teslimat seçeneği başarıyla gösterildi";
-        public static final String deliveryOptionAdded = "Teslimat seçeneği başarıyla eklendi";
+        public static final String deliveryOptionNotFound = "deliveryOptionNotFound";
+        public static final String deliveryOptionsListed = "deliveryOptionsListed";
+        public static final String deliveryOptionReceived = "deliveryOptionReceived";
+        public static final String deliveryOptionAdded = "deliveryOptionAdded";
     }
 
     public static class District {
-        public static final String districtNotFound = "İlgili mahalle bulunamadı.";
-        public static final String districtsListed = "Mahalleler başarıyla listelendi";
-        public static final String districtReceived = "Mahalle başarıyla gösterildi";
-        public static final String districtAdded = "Mahalle başarıyla eklendi";
+        public static final String districtNotFound = "districtNotFound";
+        public static final String districtsListed = "districtsListed";
+        public static final String districtReceived = "districtReceived";
     }
 
     public static class IndividualCustomer {
-        public static final String individualCustomersListed = "Bireysel müşteriler başarıyla listelendi";
-        public static final String individualCustomerReceived = "Bireysel müşteri başarıyla gösterildi";
-        public static final String individualCustomerAdded = "Bireysel müşteri başarıyla eklendi";
+        public static final String individualCustomersListed = "individualCustomersListed";
+        public static final String individualCustomerReceived = "individualCustomerReceived";
+        public static final String individualCustomerAdded = "individualCustomerAdded";
+    }
+
+    public static class Invoice {
+        public static final String invoiceNotFound = "invoiceNotFound";
+        public static final String invoicesListed = "invoicesListed";
+        public static final String invoiceReceived = "invoiceReceived";
+        public static final String invoiceAdded = "invoiceAdded";
     }
 
     public static class Order {
-        public static final String ordersListed = "Siparişler başarıyla listelendi";
-        public static final String orderReceived = "Sipariş başarıyla gösterildi";
-        public static final String orderAdded = "Sipariş başarıyla eklendi";
-        public static final String orderNotFound = "İlgili sipariş bulunamadı.";
+        public static final String ordersListed = "ordersListed";
+        public static final String orderReceived = "orderReceived";
+        public static final String orderAdded = "orderAdded";
+        public static final String orderNotFound = "orderNotFound";
     }
-
+    public static class OrderItem {
+        public static final String orderItemsListed = "orderItemsListed";
+        public static final String orderItemReceived = "orderItemReceived";
+        public static final String orderItemAdded = "orderItemAdded";
+        public static final String orderItemNotFound = "orderItemNotFound";
+    }
     public static class PaymentType {
-        public static final String paymentTypesListed = "Ödeme yöntemleri başarıyla listelendi";
-        public static final String paymentTypeReceived = "Ödeme yöntemi başarıyla gösterildi";
-        public static final String paymentTypeAdded = "Ödeme yöntemi başarıyla eklendi";
+        public static final String paymentTypesListed = "paymentTypesListed";
+        public static final String paymentTypeReceived = "paymentTypeReceived";
+        public static final String paymentTypeNotFound="paymentTypeNotFound";
+        public static final String paymentTypeAdded = "paymentTypeAdded";
+    }
+    public static class Payment {
+        public static final String paymentAdded = "paymentAdded";
     }
 
     public static class ProductCategory {
-        public static final String productCategoriesListed = "Ürünler ve kategorileri başarıyla listelendi";
-        public static final String productCategoryReceived = "Ürün ve kategorisi başarıyla gösterildi";
-        public static final String productCategoryAdded = "Ürün ve kategorisi başarıyla eklendi";
+        public static final String productCategoriesListed = "productCategoriesListed";
+        public static final String productCategoryReceived = "productCategoryReceived";
+        public static final String productCategoryAdded = "productCategoryAdded";
     }
 
     public static class ProductChar {
-        public static final String productCharNotFound = "İlgili ürün özelliği bulunamadı.";
-        public static final String productCharsListed = "Ürün özellikleri başarıyla listelendi";
-        public static final String productCharReceived = "Ürün özelliği başarıyla gösterildi";
-        public static final String productCharAdded = "Ürün özelliği başarıyla eklendi";
+        public static final String productCharNotFound = "productCharNotFound";
+        public static final String productCharsListed = "productCharsListed";
+        public static final String productCharReceived = "productCharReceived";
+        public static final String productCharAdded = "productCharAdded";
     }
 
     public static class ProductCharValue {
-        public static final String productCharValuesListed = "Ürün özellik detayları başarıyla listelendi";
-        public static final String productCharValueReceived = "Ürün özellik detayı başarıyla gösterildi";
-        public static final String productCharValueAdded = "Ürün özellik detayı başarıyla eklendi";
+        public static final String productCharValuesListed = "productCharValuesListed";
+        public static final String productCharValueReceived = "productCharValueReceived";
+        public static final String productCharValueAdded = "productCharValueAdded";
     }
 
     public static class Product {
-        public static final String productNotFound = "İlgili ürün bulunamadı.";
-        public static final String productsListed = "Ürünler başarıyla listelendi";
-        public static final String productReceived = "Ürün başarıyla gösterildi";
-        public static final String productAdded = "Ürün başarıyla eklendi";
+        public static final String productNotFound = "productNotFound";
+        public static final String productsListed = "productsListed";
+        public static final String productReceived = "productReceived";
+        public static final String productAdded = "productAdded";
     }
 
     public static class Seller {
-        public static final String sellerNotFound = "İlgili satıcı bulunamadı.";
-        public static final String sellersListed = "Satıcılar başarıyla listelendi";
-        public static final String sellerReceived = "Satıcı başarıyla gösterildi";
-        public static final String sellerAdded = "Satıcı başarıyla eklendi";
+
+        public static final String sellerNotFound = "sellerNotFound";
+        public static final String sellersListed = "sellersListed";
+        public static final String sellerReceived = "sellerReceived";
+        public static final String sellerAdded = "sellerAdded";
     }
 
-    public  static class SellerProduct {
-        public static final String sellerProductAdded="Satıcı ürünü başarıyla ekledi";
-    }
     public static class Street {
-        public static final String streetNotFound = "İlgili sokak bulunamadı.";
-        public static final String streetsListed = "Sokaklar başarıyla listelendi";
-        public static final String streetReceived = "Sokak başarıyla gösterildi";
-        public static final String streetAdded = "Sokak başarıyla eklendi";
+        public static final String streetNotFound = "streetNotFound";
+        public static final String streetsListed = "streetsListed";
+        public static final String streetReceived = "streetReceived";
     }
 
     public static class Town {
-        public static final String townNotFound = "İlgili ilçe bulunamadı.";
-        public static final String townsListed = "İlçeler başarıyla listelendi";
-        public static final String townReceived = "İlçe başarıyla gösterildi";
-        public static final String townAdded = "İlçe başarıyla eklendi";
+        public static final String townNotFound = "townNotFound";
+        public static final String townsListed = "townsListed";
+        public static final String townReceived = "townReceived";
     }
 
     public static class User {
-        public static final String userNotFound = "İlgili kullanıcı bulunamadı.";
-        public static final String usersListed = "Kullanıcı başarıyla listelendi";
-        public static final String userReceived = "Kullanıcı başarıyla gösterildi";
-        public static final String userAdded = "Kullanıcı başarıyla eklendi";
+        public static final String userNotFound = "userNotFound";
+        public static final String usersListed = "usersListed";
+        public static final String userReceived = "userReceived";
+        public static final String userAdded = "userAdded";
+    }
+
+    public static class SellerProduct {
+        public static final String sellerProductAdded = "sellerProductAdded";
     }
 }

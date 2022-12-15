@@ -1,14 +1,13 @@
 package com.etiya.ecommercedemopair7.entities.concretes;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "addresses")
@@ -34,8 +33,8 @@ public class Address {
     private Street street;
 
     @OneToMany(mappedBy = "orderAddress")
-    private List<Order> orderAddresses;
+    private List<Payment> orderAddresses;
 
     @OneToMany(mappedBy = "invoiceAddress")
-    private List<Order> invoiceAddresses;
+    private List<Payment> invoiceAddresses;
 }

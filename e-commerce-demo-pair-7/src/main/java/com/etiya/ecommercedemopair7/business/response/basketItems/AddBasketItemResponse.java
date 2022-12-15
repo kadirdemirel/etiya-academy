@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class AddBasketItemResponse {
     private int id;
     private int basketId;
-    private int productId;
+    private int sellerProductId;
     private int quantity;
     private double itemTotalPrice;
 }

@@ -4,6 +4,7 @@ import com.etiya.ecommercedemopair7.business.request.basketItems.AddBasketItemRe
 import com.etiya.ecommercedemopair7.business.response.basketItems.AddBasketItemResponse;
 import com.etiya.ecommercedemopair7.business.response.basketItems.GetAllBasketItemResponse;
 import com.etiya.ecommercedemopair7.core.utilities.results.DataResult;
+import com.etiya.ecommercedemopair7.entities.concretes.BasketItem;
 
 import java.util.List;
 
@@ -11,4 +12,6 @@ public interface IBasketItemService {
     DataResult<AddBasketItemResponse> add(AddBasketItemRequest addBasketItemRequest);
 
     DataResult<List<GetAllBasketItemResponse>> getAll();
+
+    List<BasketItem> getByBasketItem(int basketId);
 }

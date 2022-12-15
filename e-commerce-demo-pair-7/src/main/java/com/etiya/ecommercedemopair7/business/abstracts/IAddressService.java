@@ -20,4 +20,5 @@ public interface IAddressService {
     DataResult<AddAddressResponse> add(AddAddressRequest addAddressRequest);
 
     DataResult<List<AddressDto>> getAddressDto();
+    Address getByUserId(int userId);
 }

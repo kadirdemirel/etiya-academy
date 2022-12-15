@@ -30,10 +30,4 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<ProductDetail> productDetails;
-
-    @OneToMany(mappedBy = "product")
-    private List<BasketItem> basketItems;
-
-    @OneToMany(mappedBy = "product")
-    private List<OrderItem> orderItems;
 }
