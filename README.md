@@ -17,7 +17,11 @@
 - Maven
 - Lombok
 - PostgreSQL
-
+## Partnership
+<a href="https://github.com/zeynephan49">Zeynep Han</a> <br>
+<a href="https://github.com/Furkan394">Furkan Emre Çakıroğlu</a><br>
+<a href="https://github.com/MertSoyunmezoglu">Mert Söyünmezoğlu</a><br>
+<a href="https://github.com/uonurcan">Onur Can</a>
 ## Contributing
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are greatly appreciated.
 
@@ -41,6 +45,6 @@ Project Link: https://github.com/kadirdemirel/etiya-academy
 
 ## Acknowledgment
 
-<a href="https://github.com/engindemirog">🙏engindemirog</a> <br>
-<a href="https://github.com/halitkalayci">🙏halitkalayci</a> <br>
-<a href="https://github.com/iremcibal">🙏iremcibal</a>
+<a href="https://github.com/engindemirog">🙏Engin Demiroğ</a> <br>
+<a href="https://github.com/halitkalayci">🙏Halit Kalaycı</a> <br>
+<a href="https://github.com/iremcibal">🙏İrem Balcı</a>
